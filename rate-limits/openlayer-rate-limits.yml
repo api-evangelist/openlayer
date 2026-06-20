@@ -1,0 +1,62 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Openlayer
+providerId: openlayer
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: false
+tags:
+- AI
+- Evaluation
+- Testing
+- Observability
+- LLM
+- MLOps
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  The Openlayer REST API authenticates with a Bearer API key and meters usage
+  primarily through plan-level quotas, most notably the monthly cap on
+  production inferences (rows published to inference pipelines) on the Basic
+  plan. Openlayer does not publish explicit per-endpoint request-per-minute or
+  token-per-minute limits in its public API reference; specific throttling
+  thresholds are not reconciled in this artifact.
+notes: >-
+  Verify any per-endpoint or per-account request limits, retry guidance, and
+  429 handling against current Openlayer documentation and account settings on
+  reconciliation. The Basic plan's 20,000 production inferences per month acts
+  as the primary public usage ceiling; Enterprise removes usage caps.
+sources:
+- https://www.openlayer.com/pricing
+- https://www.openlayer.com/docs/api-reference/rest/overview
+- https://www.openlayer.com/docs/monitoring/publishing-data
+responseCodes:
+  throttled: 429
+limits:
+- name: Production Inferences (Basic plan)
+  scope: account
+  metric: inferences
+  limit: 20000 per month
+  notes: Rows published to inference pipelines; Basic plan cap. Enterprise is unlimited.
+- name: Requests Per Minute (RPM)
+  scope: account
+  metric: requests
+  limit: see provider documentation
+  notes: Per-endpoint request rate limits are not published in the public API reference.
+- name: Data Stream Throughput
+  scope: inference_pipeline
+  metric: rows
+  limit: see provider documentation
+  notes: Batch size and ingestion throughput for the data-stream endpoint are not publicly specified.
+policies:
+- name: API Key Authentication
+  description: All requests require a Bearer API key in the Authorization header; quotas apply per workspace/account.
+- name: Tiered Limits
+  description: Usage ceilings are governed by plan; Basic has a monthly inference cap, Enterprise removes caps.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter and honor Retry-After on 429 responses.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,95 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Openlayer
+providerId: openlayer
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: false
+tags:
+- AI
+- Evaluation
+- Testing
+- Observability
+- LLM
+- MLOps
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Openlayer spend. Openlayer is a subscription/seat-and-usage
+  platform: a free Basic plan with a monthly production-inference cap, and a
+  sales-led Enterprise plan with unlimited usage and custom terms. The primary
+  usage meter is production inferences (rows published to inference pipelines);
+  seats and projects are seat/quota dimensions. Public dollar rates for
+  Enterprise are not published, so cost figures are not reconciled here.
+notes: >-
+  Enterprise pricing is negotiated; confirm contract structure, included
+  inference volume, overage handling, and seat counts during reconciliation.
+sources:
+- https://www.openlayer.com/pricing
+- https://www.openlayer.com/docs
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Openlayer
+serviceCategory: AI and Machine Learning
+billingModel:
+  pricingCategory: Subscription
+  billingFrequency: Monthly
+  billingCurrency: USD
+  chargeCategories:
+  - Usage
+  - Purchase
+focusColumns:
+  ServiceName: Openlayer
+  ServiceCategory: AI and Machine Learning
+  ProviderName: Openlayer
+  PublisherName: Openlayer
+  InvoiceIssuerName: Openlayer
+  BillingCurrency: USD
+  ChargeCategory: Usage
+  PricingCategory: Subscription
+meters:
+- name: production_inferences
+  description: Rows published to inference pipelines via the data-stream endpoint; the primary usage meter, capped on Basic.
+  unit: inferences
+  aggregation: sum
+  dimensions:
+  - workspace
+  - project
+  - inference_pipeline
+- name: seats
+  description: Member seats included in the plan.
+  unit: seats
+  aggregation: max
+  dimensions:
+  - workspace
+- name: projects
+  description: Projects created in the workspace, subject to plan quota.
+  unit: projects
+  aggregation: max
+  dimensions:
+  - workspace
+- name: subscription_fee
+  description: Recurring plan/subscription charge (Enterprise; negotiated).
+  unit: contract
+  aggregation: sum
+  dimensions:
+  - workspace
+principles:
+- name: Visibility
+  description: Track production-inference volume per project and pipeline against the plan cap; monitor seat and project counts.
+- name: Allocation
+  description: Map workspaces, projects, and pipelines to teams/cost centers; tag API keys per workload.
+- name: Optimization
+  description: Sample or batch production data sensibly to stay within inference quotas; archive unused projects and pipelines.
+- name: Accountability
+  description: Assign owners per project; review inference burn and seat utilization against the plan monthly.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

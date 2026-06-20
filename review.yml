@@ -1,0 +1,82 @@
+aid: openlayer
+name: Openlayer
+review:
+  question: Does Openlayer expose a documented public WebSocket or streaming (SSE) API?
+  answer: false
+  date: '2026-06-20'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was created. Openlayer's "data stream" is not an
+    event-stream transport: it is a synchronous HTTP POST to
+    /inference-pipelines/{inferencePipelineId}/data-stream that publishes a
+    batch of production rows. No WebSocket (ws://, wss://) and no HTTP
+    Server-Sent Events (SSE) surface is documented in the Openlayer REST API
+    reference, so there is nothing in scope for AsyncAPI modeling.
+findings:
+  summary: |
+    Openlayer publishes a documented REST API at https://api.openlayer.com/v1
+    authenticated with a Bearer API key, with official SDKs (Python, Go, and
+    others) generated from a Stainless OpenAPI definition. Despite the name,
+    the "data-stream" endpoint is a normal synchronous HTTP POST that accepts a
+    config object plus a batch of rows; it is not a long-lived stream, SSE, or
+    WebSocket. No realtime, bidirectional, or server-push transport is
+    documented anywhere in the API reference.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.openlayer.com/v1
+      documented: true
+    - protocol: SSE
+      scheme: https
+      documented: false
+      note: No Server-Sent Events transport is documented; the data-stream endpoint is a synchronous POST.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented in Openlayer's REST API reference or SDKs as of the review date.
+  endpointsConfirmedRest:
+    - GET    https://api.openlayer.com/v1/projects
+    - POST   https://api.openlayer.com/v1/projects
+    - DELETE https://api.openlayer.com/v1/projects/{projectId}
+    - GET    https://api.openlayer.com/v1/projects/{projectId}/versions
+    - POST   https://api.openlayer.com/v1/projects/{projectId}/versions
+    - GET    https://api.openlayer.com/v1/projects/{projectId}/inference-pipelines
+    - POST   https://api.openlayer.com/v1/projects/{projectId}/inference-pipelines
+    - GET    https://api.openlayer.com/v1/projects/{projectId}/tests
+    - POST   https://api.openlayer.com/v1/projects/{projectId}/tests
+    - PUT    https://api.openlayer.com/v1/projects/{projectId}/tests
+    - GET    https://api.openlayer.com/v1/versions/{projectVersionId}
+    - GET    https://api.openlayer.com/v1/versions/{projectVersionId}/results
+    - GET    https://api.openlayer.com/v1/inference-pipelines/{inferencePipelineId}
+    - PUT    https://api.openlayer.com/v1/inference-pipelines/{inferencePipelineId}
+    - DELETE https://api.openlayer.com/v1/inference-pipelines/{inferencePipelineId}
+    - POST   https://api.openlayer.com/v1/inference-pipelines/{inferencePipelineId}/data-stream
+    - GET    https://api.openlayer.com/v1/inference-pipelines/{inferencePipelineId}/rows/{inferenceId}
+    - POST   https://api.openlayer.com/v1/inference-pipelines/{inferencePipelineId}/rows
+    - PUT    https://api.openlayer.com/v1/inference-pipelines/{inferencePipelineId}/rows
+    - DELETE https://api.openlayer.com/v1/inference-pipelines/{inferencePipelineId}/rows/{inferenceId}
+    - GET    https://api.openlayer.com/v1/inference-pipelines/{inferencePipelineId}/results
+    - POST   https://api.openlayer.com/v1/tests/{testId}/evaluate
+    - GET    https://api.openlayer.com/v1/tests/{testId}/results
+    - POST   https://api.openlayer.com/v1/storage/presigned-url
+sources:
+  - url: https://www.openlayer.com/docs/api-reference/rest/overview
+    type: APIReference
+    note: States base URL https://api.openlayer.com/v1 and Bearer API key authentication.
+  - url: https://github.com/openlayer-ai/openlayer-python
+    type: SDK
+    note: Official Python SDK generated from a Stainless OpenAPI; api.md enumerates the REST resources and paths.
+  - url: https://github.com/openlayer-ai/openlayer-go
+    type: SDK
+    note: Official Go SDK; inference_pipelines.data.stream() posts to the data-stream endpoint.
+  - url: https://www.openlayer.com/docs/monitoring/publishing-data
+    type: Documentation
+    note: Describes publishing production data; uses the synchronous data-stream POST, not a streaming transport.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket or SSE protocol surface exists. The data-stream endpoint is a
+    synchronous HTTP POST, so no AsyncAPI document was authored. The REST
+    surface is fully captured in openapi/openlayer-openapi.yml.

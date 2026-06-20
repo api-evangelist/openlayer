@@ -1,0 +1,102 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Openlayer
+providerId: openlayer
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: false
+tags:
+- AI
+- Evaluation
+- Testing
+- Observability
+- LLM
+- MLOps
+- Plans
+description: >-
+  Openlayer offers a self-serve Basic plan (free to start, with a monthly cap
+  on production inferences and limits on members and projects) and a sales-led
+  Enterprise plan with unlimited usage, SSO/RBAC, on-premise deployment, an SLA,
+  and custom terms. Detailed Enterprise pricing is not published and requires
+  contacting sales, so dollar figures are not reconciled in this artifact.
+notes: >-
+  Plan limits (e.g. monthly inferences, member and project counts) are taken
+  from the public pricing page and may change; verify on reconciliation. The
+  same metered concept across both plans is the production inference (a row
+  published to an inference pipeline).
+sources:
+- https://www.openlayer.com/pricing
+- https://www.openlayer.com/docs
+plans:
+- id: openlayer-basic
+  name: Basic
+  type: free
+  description: >-
+    Free self-serve plan to get started with evaluation, testing, and
+    monitoring, including CLI, SDK, and API access with core observability and
+    alerting. Subject to monthly usage and seat limits.
+  entries:
+  - label: Production Inferences
+    name: inferences
+    type: included
+    metric: inferences
+    limit: 20000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  - label: Members
+    name: members
+    type: included
+    metric: seats
+    limit: 1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  - label: Projects
+    name: projects
+    type: included
+    metric: projects
+    limit: 5
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  elements:
+  - name: CLI, SDK, and REST API access
+  - name: Core Observability
+  - name: Alerting
+  - name: Community Support
+- id: openlayer-enterprise
+  name: Enterprise
+  type: enterprise
+  description: >-
+    Sales-led plan for larger teams with unlimited usage, team access controls
+    (SAML SSO, RBAC), on-premise deployment, a 99.99% SLA, white-glove
+    onboarding, and custom terms. Contact Openlayer sales.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Unlimited Usage
+  - name: SAML SSO and RBAC
+  - name: On-Premise Deployment
+  - name: 99.99% SLA
+  - name: White-Glove Onboarding
+  - name: Custom Terms
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

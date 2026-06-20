@@ -1,0 +1,529 @@
+{
+  "item": [
+    {
+      "name": "Projects",
+      "description": {
+        "content": "Create, list, and delete projects.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "name": "List projects",
+          "request": {
+            "name": "List projects",
+            "url": {
+              "path": ["projects"],
+              "host": ["{{baseUrl}}"],
+              "query": [
+                { "key": "name", "value": "", "disabled": true },
+                { "key": "taskType", "value": "", "disabled": true },
+                { "key": "page", "value": "1", "disabled": true },
+                { "key": "perPage", "value": "100", "disabled": true }
+              ],
+              "variable": []
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET",
+            "auth": null
+          }
+        },
+        {
+          "name": "Create a project",
+          "request": {
+            "name": "Create a project",
+            "url": { "path": ["projects"], "host": ["{{baseUrl}}"], "query": [], "variable": [] },
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"My Project\",\n  \"taskType\": \"llm-base\",\n  \"description\": \"My first Openlayer project\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "Delete a project",
+          "request": {
+            "name": "Delete a project",
+            "url": {
+              "path": ["projects", ":projectId"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [{ "key": "projectId", "value": "" }]
+            },
+            "header": [],
+            "method": "DELETE",
+            "auth": null
+          }
+        }
+      ]
+    },
+    {
+      "name": "Commits",
+      "description": {
+        "content": "Project versions (commits) and their test results.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "name": "List project commits",
+          "request": {
+            "name": "List project commits",
+            "url": {
+              "path": ["projects", ":projectId", "versions"],
+              "host": ["{{baseUrl}}"],
+              "query": [
+                { "key": "page", "value": "1", "disabled": true },
+                { "key": "perPage", "value": "100", "disabled": true }
+              ],
+              "variable": [{ "key": "projectId", "value": "" }]
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET",
+            "auth": null
+          }
+        },
+        {
+          "name": "Create a project commit",
+          "request": {
+            "name": "Create a project commit",
+            "url": {
+              "path": ["projects", ":projectId", "versions"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [{ "key": "projectId", "value": "" }]
+            },
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"commit\": {\n    \"message\": \"Initial commit\"\n  },\n  \"storageUri\": \"s3://...\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "Retrieve a commit",
+          "request": {
+            "name": "Retrieve a commit",
+            "url": {
+              "path": ["versions", ":projectVersionId"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [{ "key": "projectVersionId", "value": "" }]
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET",
+            "auth": null
+          }
+        },
+        {
+          "name": "List commit test results",
+          "request": {
+            "name": "List commit test results",
+            "url": {
+              "path": ["versions", ":projectVersionId", "results"],
+              "host": ["{{baseUrl}}"],
+              "query": [
+                { "key": "status", "value": "", "disabled": true },
+                { "key": "type", "value": "", "disabled": true }
+              ],
+              "variable": [{ "key": "projectVersionId", "value": "" }]
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET",
+            "auth": null
+          }
+        }
+      ]
+    },
+    {
+      "name": "Inference Pipelines",
+      "description": {
+        "content": "Production monitoring pipelines and their rows.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "name": "List inference pipelines",
+          "request": {
+            "name": "List inference pipelines",
+            "url": {
+              "path": ["projects", ":projectId", "inference-pipelines"],
+              "host": ["{{baseUrl}}"],
+              "query": [
+                { "key": "name", "value": "", "disabled": true },
+                { "key": "page", "value": "1", "disabled": true },
+                { "key": "perPage", "value": "100", "disabled": true }
+              ],
+              "variable": [{ "key": "projectId", "value": "" }]
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET",
+            "auth": null
+          }
+        },
+        {
+          "name": "Create an inference pipeline",
+          "request": {
+            "name": "Create an inference pipeline",
+            "url": {
+              "path": ["projects", ":projectId", "inference-pipelines"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [{ "key": "projectId", "value": "" }]
+            },
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"production\",\n  \"description\": \"Production monitoring pipeline\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "Retrieve an inference pipeline",
+          "request": {
+            "name": "Retrieve an inference pipeline",
+            "url": {
+              "path": ["inference-pipelines", ":inferencePipelineId"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [{ "key": "inferencePipelineId", "value": "" }]
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET",
+            "auth": null
+          }
+        },
+        {
+          "name": "Update an inference pipeline",
+          "request": {
+            "name": "Update an inference pipeline",
+            "url": {
+              "path": ["inference-pipelines", ":inferencePipelineId"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [{ "key": "inferencePipelineId", "value": "" }]
+            },
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"production\",\n  \"description\": \"Updated description\"\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "Delete an inference pipeline",
+          "request": {
+            "name": "Delete an inference pipeline",
+            "url": {
+              "path": ["inference-pipelines", ":inferencePipelineId"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [{ "key": "inferencePipelineId", "value": "" }]
+            },
+            "header": [],
+            "method": "DELETE",
+            "auth": null
+          }
+        },
+        {
+          "name": "List inference pipeline test results",
+          "request": {
+            "name": "List inference pipeline test results",
+            "url": {
+              "path": ["inference-pipelines", ":inferencePipelineId", "results"],
+              "host": ["{{baseUrl}}"],
+              "query": [
+                { "key": "status", "value": "", "disabled": true },
+                { "key": "type", "value": "", "disabled": true }
+              ],
+              "variable": [{ "key": "inferencePipelineId", "value": "" }]
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET",
+            "auth": null
+          }
+        },
+        {
+          "name": "Retrieve a row",
+          "request": {
+            "name": "Retrieve a row",
+            "url": {
+              "path": ["inference-pipelines", ":inferencePipelineId", "rows", ":inferenceId"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                { "key": "inferencePipelineId", "value": "" },
+                { "key": "inferenceId", "value": "" }
+              ]
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET",
+            "auth": null
+          }
+        },
+        {
+          "name": "Create rows",
+          "request": {
+            "name": "Create rows",
+            "url": {
+              "path": ["inference-pipelines", ":inferencePipelineId", "rows"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [{ "key": "inferencePipelineId", "value": "" }]
+            },
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"config\": {\n    \"inputVariableNames\": [\"user_query\"],\n    \"outputColumnName\": \"model_output\"\n  },\n  \"rows\": [\n    { \"user_query\": \"hello\", \"model_output\": \"hi\" }\n  ]\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "Update a row",
+          "request": {
+            "name": "Update a row",
+            "url": {
+              "path": ["inference-pipelines", ":inferencePipelineId", "rows"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [{ "key": "inferencePipelineId", "value": "" }]
+            },
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"inferenceId\": \"abc-123\",\n  \"row\": { \"ground_truth\": \"correct\" }\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "Delete a row",
+          "request": {
+            "name": "Delete a row",
+            "url": {
+              "path": ["inference-pipelines", ":inferencePipelineId", "rows", ":inferenceId"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [
+                { "key": "inferencePipelineId", "value": "" },
+                { "key": "inferenceId", "value": "" }
+              ]
+            },
+            "header": [],
+            "method": "DELETE",
+            "auth": null
+          }
+        }
+      ]
+    },
+    {
+      "name": "Data Stream",
+      "description": {
+        "content": "Publish production inference data to a pipeline.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "name": "Stream production data",
+          "request": {
+            "name": "Stream production data",
+            "url": {
+              "path": ["inference-pipelines", ":inferencePipelineId", "data-stream"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [{ "key": "inferencePipelineId", "value": "" }]
+            },
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"config\": {\n    \"inputVariableNames\": [\"user_query\"],\n    \"outputColumnName\": \"model_output\",\n    \"numOfTokenColumnName\": \"tokens\",\n    \"costColumnName\": \"cost\",\n    \"latencyColumnName\": \"latency_ms\",\n    \"timestampColumnName\": \"timestamp\"\n  },\n  \"rows\": [\n    {\n      \"user_query\": \"What is Openlayer?\",\n      \"model_output\": \"An AI evaluation platform.\",\n      \"tokens\": 42,\n      \"cost\": 0.0003,\n      \"latency_ms\": 250,\n      \"timestamp\": 1718841600\n    }\n  ]\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Tests",
+      "description": {
+        "content": "Define, evaluate, and read project tests.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "name": "List project tests",
+          "request": {
+            "name": "List project tests",
+            "url": {
+              "path": ["projects", ":projectId", "tests"],
+              "host": ["{{baseUrl}}"],
+              "query": [
+                { "key": "includeArchived", "value": "", "disabled": true },
+                { "key": "type", "value": "", "disabled": true }
+              ],
+              "variable": [{ "key": "projectId", "value": "" }]
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET",
+            "auth": null
+          }
+        },
+        {
+          "name": "Create a project test",
+          "request": {
+            "name": "Create a project test",
+            "url": {
+              "path": ["projects", ":projectId", "tests"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [{ "key": "projectId", "value": "" }]
+            },
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Latency under 1s\",\n  \"type\": \"performance\",\n  \"thresholds\": [\n    { \"measurement\": \"p95Latency\", \"operator\": \"<=\", \"value\": 1000 }\n  ]\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "Update project tests",
+          "request": {
+            "name": "Update project tests",
+            "url": {
+              "path": ["projects", ":projectId", "tests"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [{ "key": "projectId", "value": "" }]
+            },
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Accept", "value": "application/json" }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tests\": []\n}",
+              "options": { "raw": { "language": "json" } }
+            }
+          }
+        },
+        {
+          "name": "Evaluate a test",
+          "request": {
+            "name": "Evaluate a test",
+            "url": {
+              "path": ["tests", ":testId", "evaluate"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [{ "key": "testId", "value": "" }]
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "POST",
+            "auth": null
+          }
+        },
+        {
+          "name": "List results for a test",
+          "request": {
+            "name": "List results for a test",
+            "url": {
+              "path": ["tests", ":testId", "results"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": [{ "key": "testId", "value": "" }]
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "GET",
+            "auth": null
+          }
+        }
+      ]
+    },
+    {
+      "name": "Storage",
+      "description": {
+        "content": "Presigned URLs for uploading datasets and artifacts.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "name": "Create a presigned URL",
+          "request": {
+            "name": "Create a presigned URL",
+            "url": {
+              "path": ["storage", "presigned-url"],
+              "host": ["{{baseUrl}}"],
+              "query": [{ "key": "objectName", "value": "" }],
+              "variable": []
+            },
+            "header": [{ "key": "Accept", "value": "application/json" }],
+            "method": "POST",
+            "auth": null
+          }
+        }
+      ]
+    }
+  ],
+  "event": [],
+  "variable": [
+    { "type": "string", "value": "https://api.openlayer.com/v1", "key": "baseUrl" }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [{ "key": "token", "value": "{{bearerToken}}" }]
+  },
+  "info": {
+    "_postman_id": "0f5a1c3e-7b2d-4e9a-9c11-openlayer000001",
+    "name": "Openlayer API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Openlayer REST API for AI evaluation, testing, and observability. Base URL https://api.openlayer.com/v1 with Bearer API key authentication.\n\nContact Support:\n Name: Openlayer Support\n Email: support@openlayer.com",
+      "type": "text/plain"
+    }
+  }
+}

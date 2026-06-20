@@ -1,0 +1,123 @@
+aid: openlayer
+url: https://raw.githubusercontent.com/api-evangelist/openlayer/refs/heads/main/apis.yml
+name: Openlayer
+kind: company
+description: Openlayer is an AI evaluation, testing, and observability platform for
+  machine learning and LLM applications. Its REST API lets teams create projects,
+  commit model versions and datasets, run tests, stream production inference data
+  into monitoring pipelines, and retrieve test results - with official SDKs generated
+  from a Stainless OpenAPI definition.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- AI
+- Evaluation
+- Testing
+- Observability
+- LLM
+- MLOps
+created: '2026-06-20'
+modified: '2026-06-20'
+specificationVersion: '0.19'
+apis:
+- aid: openlayer:openlayer-projects-api
+  name: Openlayer Projects API
+  tags:
+  - Projects
+  - Workspaces
+  - Tests
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.openlayer.com/docs/api-reference/rest/overview
+  baseURL: https://api.openlayer.com/v1
+  properties:
+  - url: https://www.openlayer.com/docs
+    type: Documentation
+  - url: https://www.openlayer.com/docs/api-reference/rest/overview
+    type: APIReference
+  - url: openapi/openlayer-openapi.yml
+    type: OpenAPI
+  - url: collections/openlayer.postman_collection.json
+    type: PostmanCollection
+  description: Create, list, and delete projects, and manage the tests defined within
+    a project. Projects are the top-level container for models, datasets, commits,
+    and inference pipelines.
+- aid: openlayer:openlayer-inference-pipelines-api
+  name: Openlayer Inference Pipelines API
+  tags:
+  - Inference Pipelines
+  - Monitoring
+  - Observability
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.openlayer.com/docs/api-reference/rest/overview
+  baseURL: https://api.openlayer.com/v1
+  properties:
+  - url: https://www.openlayer.com/docs/monitoring
+    type: Documentation
+  - url: https://www.openlayer.com/docs/api-reference/rest/overview
+    type: APIReference
+  - url: openapi/openlayer-openapi.yml
+    type: OpenAPI
+  - url: collections/openlayer.postman_collection.json
+    type: PostmanCollection
+  description: Create, retrieve, update, and delete inference pipelines for monitoring
+    production models, plus manage pipeline rows, sessions, and users used in
+    production observability.
+- aid: openlayer:openlayer-data-stream-api
+  name: Openlayer Data Stream API
+  tags:
+  - Data Stream
+  - Production Data
+  - Monitoring
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.openlayer.com/docs/monitoring/publishing-data
+  baseURL: https://api.openlayer.com/v1
+  properties:
+  - url: https://www.openlayer.com/docs/monitoring/publishing-data
+    type: Documentation
+  - url: https://www.openlayer.com/docs/api-reference/rest/overview
+    type: APIReference
+  - url: openapi/openlayer-openapi.yml
+    type: OpenAPI
+  - url: collections/openlayer.postman_collection.json
+    type: PostmanCollection
+  description: Publish production inference data (rows) to an inference pipeline via
+    the data-stream endpoint, mapping input variables, outputs, token counts, costs,
+    timestamps, and ground truth for continuous monitoring.
+- aid: openlayer:openlayer-commits-test-results-api
+  name: Openlayer Commits and Test Results API
+  tags:
+  - Commits
+  - Versions
+  - Test Results
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.openlayer.com/docs/api-reference/rest/overview
+  baseURL: https://api.openlayer.com/v1
+  properties:
+  - url: https://www.openlayer.com/docs
+    type: Documentation
+  - url: https://www.openlayer.com/docs/api-reference/rest/overview
+    type: APIReference
+  - url: openapi/openlayer-openapi.yml
+    type: OpenAPI
+  - url: collections/openlayer.postman_collection.json
+    type: PostmanCollection
+  description: Create and list project commits (versions), retrieve a single commit,
+    evaluate tests, and fetch commit and inference-pipeline test results to gate
+    deployments on evaluation outcomes.
+common:
+- type: GitHubOrganization
+  url: https://github.com/openlayer-ai
+- type: LinkedIn
+  url: https://www.linkedin.com/company/openlayer
+- type: Website
+  url: https://www.openlayer.com
+- type: Documentation
+  url: https://www.openlayer.com/docs
+- type: Plans
+  url: plans/openlayer-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/openlayer-rate-limits.yml
+- type: FinOps
+  url: finops/openlayer-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

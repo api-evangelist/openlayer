@@ -1,0 +1,201 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Openlayer API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": { "name": "Projects", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List projects", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.openlayer.com/v1/projects" },
+          "docs": "List the projects in the authenticated user's workspace."
+        },
+        {
+          "info": { "name": "Create a project", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.openlayer.com/v1/projects",
+            "body": { "type": "json", "data": "{\"name\":\"My Project\",\"taskType\":\"llm-base\"}" }
+          },
+          "docs": "Create a new project."
+        },
+        {
+          "info": { "name": "Delete a project", "type": "http" },
+          "http": { "method": "DELETE", "url": "https://api.openlayer.com/v1/projects/{projectId}" },
+          "docs": "Delete a project by id."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Commits", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List project commits", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.openlayer.com/v1/projects/{projectId}/versions" },
+          "docs": "List the commits (versions) for a project."
+        },
+        {
+          "info": { "name": "Create a project commit", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.openlayer.com/v1/projects/{projectId}/versions",
+            "body": { "type": "json", "data": "{\"commit\":{\"message\":\"Initial commit\"},\"storageUri\":\"s3://...\"}" }
+          },
+          "docs": "Create a new commit within a project."
+        },
+        {
+          "info": { "name": "Retrieve a commit", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.openlayer.com/v1/versions/{projectVersionId}" },
+          "docs": "Retrieve a single commit by id."
+        },
+        {
+          "info": { "name": "List commit test results", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.openlayer.com/v1/versions/{projectVersionId}/results" },
+          "docs": "List the test results for a commit."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Inference Pipelines", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List inference pipelines", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.openlayer.com/v1/projects/{projectId}/inference-pipelines" },
+          "docs": "List the inference pipelines in a project."
+        },
+        {
+          "info": { "name": "Create an inference pipeline", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.openlayer.com/v1/projects/{projectId}/inference-pipelines",
+            "body": { "type": "json", "data": "{\"name\":\"production\"}" }
+          },
+          "docs": "Create a new inference pipeline within a project."
+        },
+        {
+          "info": { "name": "Retrieve an inference pipeline", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.openlayer.com/v1/inference-pipelines/{inferencePipelineId}" },
+          "docs": "Retrieve an inference pipeline by id."
+        },
+        {
+          "info": { "name": "Update an inference pipeline", "type": "http" },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.openlayer.com/v1/inference-pipelines/{inferencePipelineId}",
+            "body": { "type": "json", "data": "{\"name\":\"production\"}" }
+          },
+          "docs": "Update an inference pipeline."
+        },
+        {
+          "info": { "name": "Delete an inference pipeline", "type": "http" },
+          "http": { "method": "DELETE", "url": "https://api.openlayer.com/v1/inference-pipelines/{inferencePipelineId}" },
+          "docs": "Delete an inference pipeline."
+        },
+        {
+          "info": { "name": "List inference pipeline test results", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.openlayer.com/v1/inference-pipelines/{inferencePipelineId}/results" },
+          "docs": "List the test results for an inference pipeline."
+        },
+        {
+          "info": { "name": "Retrieve a row", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.openlayer.com/v1/inference-pipelines/{inferencePipelineId}/rows/{inferenceId}" },
+          "docs": "Retrieve a streamed inference row."
+        },
+        {
+          "info": { "name": "Create rows", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.openlayer.com/v1/inference-pipelines/{inferencePipelineId}/rows",
+            "body": { "type": "json", "data": "{\"config\":{},\"rows\":[]}" }
+          },
+          "docs": "Create inference pipeline rows."
+        },
+        {
+          "info": { "name": "Update a row", "type": "http" },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.openlayer.com/v1/inference-pipelines/{inferencePipelineId}/rows",
+            "body": { "type": "json", "data": "{\"inferenceId\":\"abc-123\",\"row\":{}}" }
+          },
+          "docs": "Update a previously published row."
+        },
+        {
+          "info": { "name": "Delete a row", "type": "http" },
+          "http": { "method": "DELETE", "url": "https://api.openlayer.com/v1/inference-pipelines/{inferencePipelineId}/rows/{inferenceId}" },
+          "docs": "Delete an inference pipeline row."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Data Stream", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Stream production data", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.openlayer.com/v1/inference-pipelines/{inferencePipelineId}/data-stream",
+            "body": { "type": "json", "data": "{\"config\":{\"inputVariableNames\":[\"user_query\"],\"outputColumnName\":\"model_output\"},\"rows\":[{\"user_query\":\"hi\",\"model_output\":\"hello\"}]}" }
+          },
+          "docs": "Publish production inference data (rows) to an inference pipeline."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Tests", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List project tests", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.openlayer.com/v1/projects/{projectId}/tests" },
+          "docs": "List the tests defined within a project."
+        },
+        {
+          "info": { "name": "Create a project test", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://api.openlayer.com/v1/projects/{projectId}/tests",
+            "body": { "type": "json", "data": "{\"name\":\"Latency under 1s\",\"type\":\"performance\",\"thresholds\":[]}" }
+          },
+          "docs": "Create a new test within a project."
+        },
+        {
+          "info": { "name": "Update project tests", "type": "http" },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.openlayer.com/v1/projects/{projectId}/tests",
+            "body": { "type": "json", "data": "{\"tests\":[]}" }
+          },
+          "docs": "Update one or more tests within a project."
+        },
+        {
+          "info": { "name": "Evaluate a test", "type": "http" },
+          "http": { "method": "POST", "url": "https://api.openlayer.com/v1/tests/{testId}/evaluate" },
+          "docs": "Trigger an evaluation of a test."
+        },
+        {
+          "info": { "name": "List results for a test", "type": "http" },
+          "http": { "method": "GET", "url": "https://api.openlayer.com/v1/tests/{testId}/results" },
+          "docs": "List the results for a test."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Storage", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "Create a presigned URL", "type": "http" },
+          "http": { "method": "POST", "url": "https://api.openlayer.com/v1/storage/presigned-url?objectName=" },
+          "docs": "Create a presigned URL for uploading a dataset or artifact."
+        }
+      ]
+    }
+  ]
+}
