@@ -104,6 +104,12 @@ apis:
     evaluate tests, and fetch commit and inference-pipeline test results to gate
     deployments on evaluation outcomes.
 common:
+- type: TrustCenter
+  url: security/openlayer-trust-center.yml
+- type: DomainSecurity
+  url: security/openlayer-domain-security.yml
+- type: Authentication
+  url: authentication/openlayer-authentication.yml
 - type: GitHubOrganization
   url: https://github.com/openlayer-ai
 - type: LinkedIn
@@ -118,6 +124,8 @@ common:
   url: rate-limits/openlayer-rate-limits.yml
 - type: FinOps
   url: finops/openlayer-finops.yml
+- url: https://www.openlayer.com/blog
+  type: Blog
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
