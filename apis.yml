@@ -104,6 +104,8 @@ apis:
     evaluate tests, and fetch commit and inference-pipeline test results to gate
     deployments on evaluation outcomes.
 common:
+- type: AgenticAccess
+  url: agentic-access/openlayer-agentic-access.yml
 - type: TrustCenter
   url: security/openlayer-trust-center.yml
 - type: DomainSecurity
