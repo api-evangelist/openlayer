@@ -1,0 +1,333 @@
+openapi: 3.0.1
+info:
+  title: Openlayer Commits Tests API
+  description: The Openlayer REST API for AI evaluation, testing, and observability. Manage projects, commit model versions and datasets, run and evaluate tests, create inference pipelines for production monitoring, and stream production inference data into Openlayer. All requests are authenticated with a Bearer API key.
+  termsOfService: https://www.openlayer.com/terms
+  contact:
+    name: Openlayer Support
+    url: https://www.openlayer.com/docs
+    email: support@openlayer.com
+  version: '1.0'
+servers:
+- url: https://api.openlayer.com/v1
+  description: Openlayer production API
+security:
+- api_key: []
+tags:
+- name: Tests
+  description: Define, evaluate, and read project tests.
+paths:
+  /projects/{projectId}/tests:
+    get:
+      operationId: listTests
+      tags:
+      - Tests
+      summary: List project tests
+      description: List the tests defined within a project.
+      parameters:
+      - $ref: '#/components/parameters/ProjectId'
+      - name: includeArchived
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: type
+        in: query
+        description: Filter by test type (integrity, consistency, performance).
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: A list of tests.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createTest
+      tags:
+      - Tests
+      summary: Create a project test
+      description: Create a new test within a project.
+      parameters:
+      - $ref: '#/components/parameters/ProjectId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTestRequest'
+      responses:
+        '201':
+          description: The created test.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Test'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    put:
+      operationId: updateTests
+      tags:
+      - Tests
+      summary: Update project tests
+      description: Update one or more tests within a project.
+      parameters:
+      - $ref: '#/components/parameters/ProjectId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTestsRequest'
+      responses:
+        '200':
+          description: The updated tests.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /tests/{testId}/evaluate:
+    post:
+      operationId: evaluateTest
+      tags:
+      - Tests
+      summary: Evaluate a test
+      description: Trigger an evaluation of a test by its id.
+      parameters:
+      - $ref: '#/components/parameters/TestId'
+      responses:
+        '200':
+          description: The evaluation result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestResult'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /tests/{testId}/results:
+    get:
+      operationId: listTestResults
+      tags:
+      - Tests
+      summary: List results for a test
+      parameters:
+      - $ref: '#/components/parameters/TestId'
+      responses:
+        '200':
+          description: A list of results for the test.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestResultList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    UpdateTestsRequest:
+      type: object
+      properties:
+        tests:
+          type: array
+          items:
+            $ref: '#/components/schemas/Test'
+      required:
+      - tests
+    TestList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Test'
+    TestResult:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        projectVersionId:
+          type: string
+          format: uuid
+          nullable: true
+        inferencePipelineId:
+          type: string
+          format: uuid
+          nullable: true
+        status:
+          type: string
+          description: Result status, e.g. running, passing, failing, skipped, error.
+        statusMessage:
+          type: string
+          nullable: true
+        dateCreated:
+          type: string
+          format: date-time
+        dateUpdated:
+          type: string
+          format: date-time
+        dateDataStarts:
+          type: string
+          format: date-time
+          nullable: true
+        dateDataEnds:
+          type: string
+          format: date-time
+          nullable: true
+        goal:
+          $ref: '#/components/schemas/Test'
+        goalId:
+          type: string
+          format: uuid
+          nullable: true
+      required:
+      - id
+      - status
+    Test:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        projectVersionId:
+          type: string
+          format: uuid
+          nullable: true
+        name:
+          type: string
+        description:
+          type: string
+          nullable: true
+        type:
+          type: string
+          description: The test type (integrity, consistency, performance).
+        subtype:
+          type: string
+          nullable: true
+        archived:
+          type: boolean
+        dateCreated:
+          type: string
+          format: date-time
+        dateUpdated:
+          type: string
+          format: date-time
+        creatorId:
+          type: string
+          format: uuid
+          nullable: true
+        usesMlModel:
+          type: boolean
+          nullable: true
+        usesValidationDataset:
+          type: boolean
+          nullable: true
+        usesTrainingDataset:
+          type: boolean
+          nullable: true
+        usesProductionData:
+          type: boolean
+          nullable: true
+        thresholds:
+          type: array
+          items:
+            type: object
+            properties:
+              measurement:
+                type: string
+              operator:
+                type: string
+              value:
+                oneOf:
+                - type: number
+                - type: string
+                - type: boolean
+                - type: array
+                  items: {}
+      required:
+      - id
+      - name
+      - type
+    TestResultList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/TestResult'
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+      - message
+    CreateTestRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+          nullable: true
+        type:
+          type: string
+        subtype:
+          type: string
+        thresholds:
+          type: array
+          items:
+            type: object
+            properties:
+              measurement:
+                type: string
+              operator:
+                type: string
+              value:
+                oneOf:
+                - type: number
+                - type: string
+                - type: boolean
+                - type: array
+                  items: {}
+      required:
+      - name
+      - type
+      - thresholds
+  responses:
+    Unauthorized:
+      description: Authentication failed or the API key is missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    ProjectId:
+      name: projectId
+      in: path
+      required: true
+      description: The unique identifier of the project.
+      schema:
+        type: string
+        format: uuid
+    TestId:
+      name: testId
+      in: path
+      required: true
+      description: The unique identifier of the test.
+      schema:
+        type: string
+        format: uuid
+  securitySchemes:
+    api_key:
+      type: http
+      scheme: bearer
+      bearerFormat: apiKey
+      description: Pass your Openlayer API key as a Bearer token in the Authorization header.

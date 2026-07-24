@@ -1,0 +1,202 @@
+openapi: 3.0.1
+info:
+  title: Openlayer Commits Projects API
+  description: The Openlayer REST API for AI evaluation, testing, and observability. Manage projects, commit model versions and datasets, run and evaluate tests, create inference pipelines for production monitoring, and stream production inference data into Openlayer. All requests are authenticated with a Bearer API key.
+  termsOfService: https://www.openlayer.com/terms
+  contact:
+    name: Openlayer Support
+    url: https://www.openlayer.com/docs
+    email: support@openlayer.com
+  version: '1.0'
+servers:
+- url: https://api.openlayer.com/v1
+  description: Openlayer production API
+security:
+- api_key: []
+tags:
+- name: Projects
+  description: Create, list, and delete projects.
+paths:
+  /projects:
+    get:
+      operationId: listProjects
+      tags:
+      - Projects
+      summary: List projects
+      description: List the projects in the authenticated user's workspace.
+      parameters:
+      - name: name
+        in: query
+        description: Filter projects by name.
+        required: false
+        schema:
+          type: string
+      - name: taskType
+        in: query
+        description: Filter by task type (e.g. llm-base, tabular-classification).
+        required: false
+        schema:
+          type: string
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 1
+      - name: perPage
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 100
+      responses:
+        '200':
+          description: A paginated list of projects.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createProject
+      tags:
+      - Projects
+      summary: Create a project
+      description: Create a new project in the authenticated user's workspace.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProjectRequest'
+      responses:
+        '201':
+          description: The created project.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /projects/{projectId}:
+    delete:
+      operationId: deleteProject
+      tags:
+      - Projects
+      summary: Delete a project
+      description: Delete a project by its id.
+      parameters:
+      - $ref: '#/components/parameters/ProjectId'
+      responses:
+        '204':
+          description: Project deleted.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  responses:
+    Unauthorized:
+      description: Authentication failed or the API key is missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  parameters:
+    ProjectId:
+      name: projectId
+      in: path
+      required: true
+      description: The unique identifier of the project.
+      schema:
+        type: string
+        format: uuid
+  schemas:
+    CreateProjectRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        taskType:
+          type: string
+          description: The task type, e.g. llm-base, tabular-classification, text-classification.
+        description:
+          type: string
+      required:
+      - name
+      - taskType
+    ProjectList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Project'
+    Project:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        description:
+          type: string
+          nullable: true
+        taskType:
+          type: string
+          description: The task type, e.g. llm-base, tabular-classification, text-classification.
+        creatorId:
+          type: string
+          format: uuid
+          nullable: true
+        workspaceId:
+          type: string
+          format: uuid
+          nullable: true
+        dateCreated:
+          type: string
+          format: date-time
+        dateUpdated:
+          type: string
+          format: date-time
+        source:
+          type: string
+          nullable: true
+        versionCount:
+          type: integer
+          nullable: true
+        inferencePipelineCount:
+          type: integer
+          nullable: true
+        links:
+          type: object
+          properties:
+            app:
+              type: string
+      required:
+      - id
+      - name
+      - taskType
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+      - message
+  securitySchemes:
+    api_key:
+      type: http
+      scheme: bearer
+      bearerFormat: apiKey
+      description: Pass your Openlayer API key as a Bearer token in the Authorization header.

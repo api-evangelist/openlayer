@@ -1,0 +1,158 @@
+openapi: 3.0.1
+info:
+  title: Openlayer Commits Data Stream API
+  description: The Openlayer REST API for AI evaluation, testing, and observability. Manage projects, commit model versions and datasets, run and evaluate tests, create inference pipelines for production monitoring, and stream production inference data into Openlayer. All requests are authenticated with a Bearer API key.
+  termsOfService: https://www.openlayer.com/terms
+  contact:
+    name: Openlayer Support
+    url: https://www.openlayer.com/docs
+    email: support@openlayer.com
+  version: '1.0'
+servers:
+- url: https://api.openlayer.com/v1
+  description: Openlayer production API
+security:
+- api_key: []
+tags:
+- name: Data Stream
+  description: Publish production inference data to a pipeline.
+paths:
+  /inference-pipelines/{inferencePipelineId}/data-stream:
+    post:
+      operationId: streamData
+      tags:
+      - Data Stream
+      summary: Stream production data
+      description: Publish production inference data (rows) to an inference pipeline. The config object maps the columns in each row to Openlayer concepts such as input variables, output, ground truth, latency, cost, and token counts.
+      parameters:
+      - $ref: '#/components/parameters/InferencePipelineId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DataStreamRequest'
+      responses:
+        '200':
+          description: Data accepted for ingestion.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataStreamResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/ValidationError'
+components:
+  responses:
+    ValidationError:
+      description: The request body failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed or the API key is missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    DataStreamRequest:
+      type: object
+      properties:
+        config:
+          $ref: '#/components/schemas/DataStreamConfig'
+        rows:
+          type: array
+          description: The rows of production data being published.
+          items:
+            type: object
+            additionalProperties: true
+      required:
+      - config
+      - rows
+    DataStreamResponse:
+      type: object
+      properties:
+        success:
+          type: string
+          description: Indicates the data was accepted (e.g. "success").
+    DataStreamConfig:
+      type: object
+      description: Maps the columns present in each streamed row to Openlayer concepts. The exact fields depend on the project task type (LLM vs tabular).
+      properties:
+        inputVariableNames:
+          type: array
+          items:
+            type: string
+          description: Names of the columns that are input variables to the model.
+        outputColumnName:
+          type: string
+          nullable: true
+          description: Name of the column containing the model output.
+        groundTruthColumnName:
+          type: string
+          nullable: true
+          description: Name of the column containing ground truth labels.
+        numOfTokenColumnName:
+          type: string
+          nullable: true
+          description: Name of the column containing token counts.
+        costColumnName:
+          type: string
+          nullable: true
+          description: Name of the column containing the request cost.
+        latencyColumnName:
+          type: string
+          nullable: true
+          description: Name of the column containing latency in milliseconds.
+        timestampColumnName:
+          type: string
+          nullable: true
+          description: Name of the column containing the UNIX timestamp.
+        inferenceIdColumnName:
+          type: string
+          nullable: true
+          description: Name of the column containing a unique inference id for the row.
+        contextColumnName:
+          type: string
+          nullable: true
+          description: Name of the column containing retrieved context (for RAG/LLM tasks).
+        questionColumnName:
+          type: string
+          nullable: true
+        prompt:
+          type: array
+          nullable: true
+          items:
+            type: object
+            properties:
+              role:
+                type: string
+              content:
+                type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+      - message
+  parameters:
+    InferencePipelineId:
+      name: inferencePipelineId
+      in: path
+      required: true
+      description: The unique identifier of the inference pipeline.
+      schema:
+        type: string
+        format: uuid
+  securitySchemes:
+    api_key:
+      type: http
+      scheme: bearer
+      bearerFormat: apiKey
+      description: Pass your Openlayer API key as a Bearer token in the Authorization header.
