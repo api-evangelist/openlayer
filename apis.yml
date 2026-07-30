@@ -7,7 +7,20 @@ description: Openlayer is an AI evaluation, testing, and observability platform 
   commit model versions and datasets, run tests, stream production inference data
   into monitoring pipelines, and retrieve test results - with official SDKs generated
   from a Stainless OpenAPI definition.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: enterprise
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Enterprise · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/openlayer.png
 tags:
 - AI
 - Evaluation
@@ -19,90 +32,126 @@ created: '2026-06-20'
 modified: '2026-06-20'
 specificationVersion: '0.19'
 apis:
-- aid: openlayer:openlayer-projects-api
-  name: Openlayer Projects API
-  tags:
-  - Projects
-  - Workspaces
-  - Tests
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+- aid: openlayer:openlayer-commits-api
+  name: Openlayer Commits API
+  description: Project versions (commits) and their test results.
   humanURL: https://www.openlayer.com/docs/api-reference/rest/overview
   baseURL: https://api.openlayer.com/v1
-  properties:
-  - url: https://www.openlayer.com/docs
-    type: Documentation
-  - url: https://www.openlayer.com/docs/api-reference/rest/overview
-    type: APIReference
-  - url: openapi/openlayer-openapi.yml
-    type: OpenAPI
-  - url: collections/openlayer.postman_collection.json
-    type: PostmanCollection
-  description: Create, list, and delete projects, and manage the tests defined within
-    a project. Projects are the top-level container for models, datasets, commits,
-    and inference pipelines.
-- aid: openlayer:openlayer-inference-pipelines-api
-  name: Openlayer Inference Pipelines API
-  tags:
-  - Inference Pipelines
-  - Monitoring
-  - Observability
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.openlayer.com/docs/api-reference/rest/overview
-  baseURL: https://api.openlayer.com/v1
-  properties:
-  - url: https://www.openlayer.com/docs/monitoring
-    type: Documentation
-  - url: https://www.openlayer.com/docs/api-reference/rest/overview
-    type: APIReference
-  - url: openapi/openlayer-openapi.yml
-    type: OpenAPI
-  - url: collections/openlayer.postman_collection.json
-    type: PostmanCollection
-  description: Create, retrieve, update, and delete inference pipelines for monitoring
-    production models, plus manage pipeline rows, sessions, and users used in
-    production observability.
-- aid: openlayer:openlayer-data-stream-api
-  name: Openlayer Data Stream API
-  tags:
-  - Data Stream
-  - Production Data
-  - Monitoring
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.openlayer.com/docs/monitoring/publishing-data
-  baseURL: https://api.openlayer.com/v1
-  properties:
-  - url: https://www.openlayer.com/docs/monitoring/publishing-data
-    type: Documentation
-  - url: https://www.openlayer.com/docs/api-reference/rest/overview
-    type: APIReference
-  - url: openapi/openlayer-openapi.yml
-    type: OpenAPI
-  - url: collections/openlayer.postman_collection.json
-    type: PostmanCollection
-  description: Publish production inference data (rows) to an inference pipeline via
-    the data-stream endpoint, mapping input variables, outputs, token counts, costs,
-    timestamps, and ground truth for continuous monitoring.
-- aid: openlayer:openlayer-commits-test-results-api
-  name: Openlayer Commits and Test Results API
   tags:
   - Commits
-  - Versions
-  - Test Results
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  properties:
+  - type: OpenAPI
+    url: openapi/openlayer-commits-api-openapi.yml
+  - type: Documentation
+    url: https://www.openlayer.com/docs
+  - type: APIReference
+    url: https://www.openlayer.com/docs/api-reference/rest/overview
+  - type: PostmanCollection
+    url: collections/openlayer.postman_collection.json
+  - type: Documentation
+    url: https://www.openlayer.com/docs/monitoring
+  - type: Documentation
+    url: https://www.openlayer.com/docs/monitoring/publishing-data
+- aid: openlayer:openlayer-data-stream-api
+  name: Openlayer Data Stream API
+  description: Publish production inference data to a pipeline.
   humanURL: https://www.openlayer.com/docs/api-reference/rest/overview
   baseURL: https://api.openlayer.com/v1
+  tags:
+  - Data Stream
   properties:
-  - url: https://www.openlayer.com/docs
-    type: Documentation
-  - url: https://www.openlayer.com/docs/api-reference/rest/overview
-    type: APIReference
-  - url: openapi/openlayer-openapi.yml
-    type: OpenAPI
-  - url: collections/openlayer.postman_collection.json
-    type: PostmanCollection
-  description: Create and list project commits (versions), retrieve a single commit,
-    evaluate tests, and fetch commit and inference-pipeline test results to gate
-    deployments on evaluation outcomes.
+  - type: OpenAPI
+    url: openapi/openlayer-data-stream-api-openapi.yml
+  - type: Documentation
+    url: https://www.openlayer.com/docs
+  - type: APIReference
+    url: https://www.openlayer.com/docs/api-reference/rest/overview
+  - type: PostmanCollection
+    url: collections/openlayer.postman_collection.json
+  - type: Documentation
+    url: https://www.openlayer.com/docs/monitoring
+  - type: Documentation
+    url: https://www.openlayer.com/docs/monitoring/publishing-data
+- aid: openlayer:openlayer-inference-pipelines-api
+  name: Openlayer Inference Pipelines API
+  description: Production monitoring pipelines and their rows, sessions, and users.
+  humanURL: https://www.openlayer.com/docs/api-reference/rest/overview
+  baseURL: https://api.openlayer.com/v1
+  tags:
+  - Inference Pipelines
+  properties:
+  - type: OpenAPI
+    url: openapi/openlayer-inference-pipelines-api-openapi.yml
+  - type: Documentation
+    url: https://www.openlayer.com/docs
+  - type: APIReference
+    url: https://www.openlayer.com/docs/api-reference/rest/overview
+  - type: PostmanCollection
+    url: collections/openlayer.postman_collection.json
+  - type: Documentation
+    url: https://www.openlayer.com/docs/monitoring
+  - type: Documentation
+    url: https://www.openlayer.com/docs/monitoring/publishing-data
+- aid: openlayer:openlayer-projects-api
+  name: Openlayer Projects API
+  description: Create, list, and delete projects.
+  humanURL: https://www.openlayer.com/docs/api-reference/rest/overview
+  baseURL: https://api.openlayer.com/v1
+  tags:
+  - Projects
+  properties:
+  - type: OpenAPI
+    url: openapi/openlayer-projects-api-openapi.yml
+  - type: Documentation
+    url: https://www.openlayer.com/docs
+  - type: APIReference
+    url: https://www.openlayer.com/docs/api-reference/rest/overview
+  - type: PostmanCollection
+    url: collections/openlayer.postman_collection.json
+  - type: Documentation
+    url: https://www.openlayer.com/docs/monitoring
+  - type: Documentation
+    url: https://www.openlayer.com/docs/monitoring/publishing-data
+- aid: openlayer:openlayer-storage-api
+  name: Openlayer Storage API
+  description: Presigned URLs for uploading datasets and artifacts.
+  humanURL: https://www.openlayer.com/docs/api-reference/rest/overview
+  baseURL: https://api.openlayer.com/v1
+  tags:
+  - Storage
+  properties:
+  - type: OpenAPI
+    url: openapi/openlayer-storage-api-openapi.yml
+  - type: Documentation
+    url: https://www.openlayer.com/docs
+  - type: APIReference
+    url: https://www.openlayer.com/docs/api-reference/rest/overview
+  - type: PostmanCollection
+    url: collections/openlayer.postman_collection.json
+  - type: Documentation
+    url: https://www.openlayer.com/docs/monitoring
+  - type: Documentation
+    url: https://www.openlayer.com/docs/monitoring/publishing-data
+- aid: openlayer:openlayer-tests-api
+  name: Openlayer Tests API
+  description: Define, evaluate, and read project tests.
+  humanURL: https://www.openlayer.com/docs/api-reference/rest/overview
+  baseURL: https://api.openlayer.com/v1
+  tags:
+  - Tests
+  properties:
+  - type: OpenAPI
+    url: openapi/openlayer-tests-api-openapi.yml
+  - type: Documentation
+    url: https://www.openlayer.com/docs
+  - type: APIReference
+    url: https://www.openlayer.com/docs/api-reference/rest/overview
+  - type: PostmanCollection
+    url: collections/openlayer.postman_collection.json
+  - type: Documentation
+    url: https://www.openlayer.com/docs/monitoring
+  - type: Documentation
+    url: https://www.openlayer.com/docs/monitoring/publishing-data
 common:
 - type: AgenticAccess
   url: agentic-access/openlayer-agentic-access.yml
