@@ -1,0 +1,24 @@
+{
+  "provider": "openlayer",
+  "sources": [
+    "openlayer-commits-api-openapi.yml",
+    "openlayer-data-stream-api-openapi.yml",
+    "openlayer-inference-pipelines-api-openapi.yml",
+    "openlayer-projects-api-openapi.yml",
+    "openlayer-storage-api-openapi.yml",
+    "openlayer-tests-api-openapi.yml"
+  ],
+  "outputs": [
+    "openlayer-commits-api-openapi.yml",
+    "openlayer-data-stream-api-openapi.yml",
+    "openlayer-inference-pipelines-api-openapi.yml",
+    "openlayer-projects-api-openapi.yml",
+    "openlayer-storage-api-openapi.yml",
+    "openlayer-tests-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
