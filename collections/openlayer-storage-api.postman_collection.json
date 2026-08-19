@@ -1,0 +1,182 @@
+{
+  "item": [
+    {
+      "id": "6e2bfea9-5292-4fb7-8120-e83c7d9e1a09",
+      "name": "Storage",
+      "description": {
+        "content": "Presigned URLs for uploading datasets and artifacts.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8bdd2bd3-e796-4718-8daf-9d82a2e63be5",
+          "name": "Create a presigned URL",
+          "request": {
+            "name": "Create a presigned URL",
+            "description": {
+              "content": "Create a presigned URL used to upload a dataset or artifact to Openlayer object storage before committing it to a project.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "storage",
+                "presigned-url"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "objectName",
+                  "value": "<string>",
+                  "description": "(Required) The name of the object to upload."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ab279617-c4b0-49f7-9732-fb7ef5e5e6d3",
+              "name": "A presigned upload URL.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "storage",
+                    "presigned-url"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "objectName",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"url\": \"string\",\n  \"storageUri\": \"string\",\n  \"fields\": {\n    \"key_0\": false,\n    \"key_1\": 1685.3739601004925\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "79c8e86f-31ce-42ff-8460-6bcc4be3e2a4",
+              "name": "Authentication failed or the API key is missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "storage",
+                    "presigned-url"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "objectName",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.openlayer.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "45cdfeaf-1542-40a6-9de4-de9028749a97",
+    "name": "Openlayer Commits Storage API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Openlayer REST API for AI evaluation, testing, and observability. Manage projects, commit model versions and datasets, run and evaluate tests, create inference pipelines for production monitoring, and stream production inference data into Openlayer. All requests are authenticated with a Bearer API key.\n\nContact Support:\n Name: Openlayer Support\n Email: support@openlayer.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Openlayer Commits Storage API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Storage",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a presigned URL",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.openlayer.com/v1/storage/presigned-url",
+            "params": [
+              {
+                "name": "objectName",
+                "value": "",
+                "type": "query",
+                "description": "The name of the object to upload."
+              }
+            ]
+          },
+          "docs": "Create a presigned URL used to upload a dataset or artifact to Openlayer object storage before committing it to a project."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

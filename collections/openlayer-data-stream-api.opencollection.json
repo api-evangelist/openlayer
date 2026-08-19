@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Openlayer Commits Data Stream API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Data Stream",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Stream production data",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.openlayer.com/v1/inference-pipelines/:inferencePipelineId/data-stream",
+            "params": [
+              {
+                "name": "inferencePipelineId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the inference pipeline."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Publish production inference data (rows) to an inference pipeline. The config object maps the columns in each row to Openlayer concepts such as input variables, output, ground truth, latency, cost, and token counts."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

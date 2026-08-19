@@ -1,0 +1,1974 @@
+{
+  "item": [
+    {
+      "id": "23b5a27f-d891-4594-b5db-54ce282f5150",
+      "name": "Inference Pipelines",
+      "description": {
+        "content": "Production monitoring pipelines and their rows, sessions, and users.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5a6f08ac-1d05-4856-9272-14216e2463d5",
+          "name": "List inference pipelines",
+          "request": {
+            "name": "List inference pipelines",
+            "description": {
+              "content": "List the inference pipelines in a project.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "projects",
+                ":projectId",
+                "inference-pipelines"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "disabled": false,
+                  "key": "perPage",
+                  "value": "100"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "projectId",
+                  "description": "(Required) The unique identifier of the project."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "270457a7-9649-4ff7-a93b-89c49ee25877",
+              "name": "A paginated list of inference pipelines.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":projectId",
+                    "inference-pipelines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "projectId",
+                      "description": "(Required) The unique identifier of the project."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"id\": \"928374e8-126b-fa56-7f6c-6d35bcf8003e\",\n      \"name\": \"string\",\n      \"projectId\": \"8701a25c-1755-ca87-4174-7838142250fb\",\n      \"description\": \"string\",\n      \"dateCreated\": \"1999-09-09T16:08:09.657Z\",\n      \"dateUpdated\": \"1971-06-10T06:57:51.429Z\",\n      \"dateLastSampleReceived\": \"1972-05-14T01:55:49.539Z\",\n      \"dateLastEvaluated\": \"1956-10-22T11:43:04.533Z\",\n      \"passingGoalCount\": 9230,\n      \"failingGoalCount\": 9720,\n      \"totalGoalCount\": 1860,\n      \"status\": \"string\",\n      \"statusMessage\": \"string\",\n      \"links\": {\n        \"app\": \"string\"\n      }\n    },\n    {\n      \"id\": \"9229b2e5-b286-0293-3519-3abfab5fc95d\",\n      \"name\": \"string\",\n      \"projectId\": \"4f21dd85-c360-34ef-0aee-72d5d307fcce\",\n      \"description\": \"string\",\n      \"dateCreated\": \"1960-03-02T05:53:49.092Z\",\n      \"dateUpdated\": \"1993-06-30T18:39:11.703Z\",\n      \"dateLastSampleReceived\": \"1949-05-26T01:15:12.264Z\",\n      \"dateLastEvaluated\": \"2009-08-20T02:05:01.770Z\",\n      \"passingGoalCount\": 7252,\n      \"failingGoalCount\": 7482,\n      \"totalGoalCount\": 6978,\n      \"status\": \"string\",\n      \"statusMessage\": \"string\",\n      \"links\": {\n        \"app\": \"string\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "732a4dbc-b959-4c26-8321-48018a1de212",
+              "name": "Authentication failed or the API key is missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":projectId",
+                    "inference-pipelines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "perPage",
+                      "value": "100"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "projectId",
+                      "description": "(Required) The unique identifier of the project."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5f1414f3-3df6-4883-be79-63f6524520c8",
+          "name": "Create an inference pipeline",
+          "request": {
+            "name": "Create an inference pipeline",
+            "description": {
+              "content": "Create a new inference pipeline within a project.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "projects",
+                ":projectId",
+                "inference-pipelines"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "projectId",
+                  "description": "(Required) The unique identifier of the project."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "74f5086f-b431-4288-8595-3761036b87f3",
+              "name": "The created inference pipeline.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":projectId",
+                    "inference-pipelines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "projectId",
+                      "description": "(Required) The unique identifier of the project."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"f5c4c55c-8d21-e74a-cdce-6592bb00e4ae\",\n  \"name\": \"string\",\n  \"projectId\": \"938baf52-4e07-8d7b-4b6b-13e364e46979\",\n  \"description\": \"string\",\n  \"dateCreated\": \"2000-12-02T12:38:01.850Z\",\n  \"dateUpdated\": \"1989-04-21T22:46:25.616Z\",\n  \"dateLastSampleReceived\": \"2019-12-19T20:47:23.977Z\",\n  \"dateLastEvaluated\": \"1990-08-02T23:43:22.088Z\",\n  \"passingGoalCount\": 5234,\n  \"failingGoalCount\": 9463,\n  \"totalGoalCount\": 6088,\n  \"status\": \"string\",\n  \"statusMessage\": \"string\",\n  \"links\": {\n    \"app\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aa21c06d-80b3-46f8-8e31-c30c43e7e679",
+              "name": "Authentication failed or the API key is missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "projects",
+                    ":projectId",
+                    "inference-pipelines"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "projectId",
+                      "description": "(Required) The unique identifier of the project."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "db2b9a9d-a055-41cc-8401-4407d52568f7",
+          "name": "Retrieve an inference pipeline",
+          "request": {
+            "name": "Retrieve an inference pipeline",
+            "description": {},
+            "url": {
+              "path": [
+                "inference-pipelines",
+                ":inferencePipelineId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "inferencePipelineId",
+                  "description": "(Required) The unique identifier of the inference pipeline."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "43345e6f-7889-49f9-983d-473fb147a9bf",
+              "name": "The requested inference pipeline.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inference-pipelines",
+                    ":inferencePipelineId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "inferencePipelineId",
+                      "description": "(Required) The unique identifier of the inference pipeline."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"f5c4c55c-8d21-e74a-cdce-6592bb00e4ae\",\n  \"name\": \"string\",\n  \"projectId\": \"938baf52-4e07-8d7b-4b6b-13e364e46979\",\n  \"description\": \"string\",\n  \"dateCreated\": \"2000-12-02T12:38:01.850Z\",\n  \"dateUpdated\": \"1989-04-21T22:46:25.616Z\",\n  \"dateLastSampleReceived\": \"2019-12-19T20:47:23.977Z\",\n  \"dateLastEvaluated\": \"1990-08-02T23:43:22.088Z\",\n  \"passingGoalCount\": 5234,\n  \"failingGoalCount\": 9463,\n  \"totalGoalCount\": 6088,\n  \"status\": \"string\",\n  \"statusMessage\": \"string\",\n  \"links\": {\n    \"app\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "38ea935c-811e-421d-9456-b7a37f07fc52",
+              "name": "Authentication failed or the API key is missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inference-pipelines",
+                    ":inferencePipelineId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "inferencePipelineId",
+                      "description": "(Required) The unique identifier of the inference pipeline."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5a5087c8-6ac7-4361-9447-6a0c69a6e93c",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inference-pipelines",
+                    ":inferencePipelineId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "inferencePipelineId",
+                      "description": "(Required) The unique identifier of the inference pipeline."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e9e8e386-eb3b-4640-949c-cb2395a2b3b4",
+          "name": "Update an inference pipeline",
+          "request": {
+            "name": "Update an inference pipeline",
+            "description": {},
+            "url": {
+              "path": [
+                "inference-pipelines",
+                ":inferencePipelineId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "inferencePipelineId",
+                  "description": "(Required) The unique identifier of the inference pipeline."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"referenceDatasetUri\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5e4094b5-cb75-456f-bf6c-88c4ddc8d38d",
+              "name": "The updated inference pipeline.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inference-pipelines",
+                    ":inferencePipelineId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "inferencePipelineId",
+                      "description": "(Required) The unique identifier of the inference pipeline."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"referenceDatasetUri\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"f5c4c55c-8d21-e74a-cdce-6592bb00e4ae\",\n  \"name\": \"string\",\n  \"projectId\": \"938baf52-4e07-8d7b-4b6b-13e364e46979\",\n  \"description\": \"string\",\n  \"dateCreated\": \"2000-12-02T12:38:01.850Z\",\n  \"dateUpdated\": \"1989-04-21T22:46:25.616Z\",\n  \"dateLastSampleReceived\": \"2019-12-19T20:47:23.977Z\",\n  \"dateLastEvaluated\": \"1990-08-02T23:43:22.088Z\",\n  \"passingGoalCount\": 5234,\n  \"failingGoalCount\": 9463,\n  \"totalGoalCount\": 6088,\n  \"status\": \"string\",\n  \"statusMessage\": \"string\",\n  \"links\": {\n    \"app\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8549c17c-7171-4033-822d-e790d775a6de",
+              "name": "Authentication failed or the API key is missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inference-pipelines",
+                    ":inferencePipelineId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "inferencePipelineId",
+                      "description": "(Required) The unique identifier of the inference pipeline."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"referenceDatasetUri\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "52264640-609d-45eb-a0e2-7ca4c842778d",
+          "name": "Delete an inference pipeline",
+          "request": {
+            "name": "Delete an inference pipeline",
+            "description": {},
+            "url": {
+              "path": [
+                "inference-pipelines",
+                ":inferencePipelineId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "inferencePipelineId",
+                  "description": "(Required) The unique identifier of the inference pipeline."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a9c68ddb-73a3-4e4b-8035-6a08ff7c5c0a",
+              "name": "Inference pipeline deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inference-pipelines",
+                    ":inferencePipelineId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "inferencePipelineId",
+                      "description": "(Required) The unique identifier of the inference pipeline."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fe2f6152-d0d5-4df1-b1bd-605691a75bbc",
+              "name": "Authentication failed or the API key is missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inference-pipelines",
+                    ":inferencePipelineId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "inferencePipelineId",
+                      "description": "(Required) The unique identifier of the inference pipeline."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b8e89bbb-fcf0-43c5-bc9e-0e30380d8095",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inference-pipelines",
+                    ":inferencePipelineId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "inferencePipelineId",
+                      "description": "(Required) The unique identifier of the inference pipeline."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ea0008aa-2631-4bc3-bcd1-9369a8372a31",
+          "name": "Create inference pipeline rows",
+          "request": {
+            "name": "Create inference pipeline rows",
+            "description": {},
+            "url": {
+              "path": [
+                "inference-pipelines",
+                ":inferencePipelineId",
+                "rows"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "inferencePipelineId",
+                  "description": "(Required) The unique identifier of the inference pipeline."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"config\": {\n    \"inputVariableNames\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"outputColumnName\": \"<string>\",\n    \"groundTruthColumnName\": \"<string>\",\n    \"numOfTokenColumnName\": \"<string>\",\n    \"costColumnName\": \"<string>\",\n    \"latencyColumnName\": \"<string>\",\n    \"timestampColumnName\": \"<string>\",\n    \"inferenceIdColumnName\": \"<string>\",\n    \"contextColumnName\": \"<string>\",\n    \"questionColumnName\": \"<string>\",\n    \"prompt\": [\n      {\n        \"role\": \"<string>\",\n        \"content\": \"<string>\"\n      },\n      {\n        \"role\": \"<string>\",\n        \"content\": \"<string>\"\n      }\n    ]\n  },\n  \"rows\": [\n    {\n      \"key_0\": \"string\",\n      \"key_1\": 4816.618078223551,\n      \"key_2\": 1989,\n      \"key_3\": \"string\"\n    },\n    {\n      \"key_0\": \"string\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cded883d-4be1-468d-acae-301f79fe0921",
+              "name": "Rows created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inference-pipelines",
+                    ":inferencePipelineId",
+                    "rows"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "inferencePipelineId",
+                      "description": "(Required) The unique identifier of the inference pipeline."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"config\": {\n    \"inputVariableNames\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"outputColumnName\": \"<string>\",\n    \"groundTruthColumnName\": \"<string>\",\n    \"numOfTokenColumnName\": \"<string>\",\n    \"costColumnName\": \"<string>\",\n    \"latencyColumnName\": \"<string>\",\n    \"timestampColumnName\": \"<string>\",\n    \"inferenceIdColumnName\": \"<string>\",\n    \"contextColumnName\": \"<string>\",\n    \"questionColumnName\": \"<string>\",\n    \"prompt\": [\n      {\n        \"role\": \"<string>\",\n        \"content\": \"<string>\"\n      },\n      {\n        \"role\": \"<string>\",\n        \"content\": \"<string>\"\n      }\n    ]\n  },\n  \"rows\": [\n    {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\",\n      \"key_3\": true\n    },\n    {\n      \"key_0\": \"string\",\n      \"key_1\": 4638.395652381883,\n      \"key_2\": 7083,\n      \"key_3\": false,\n      \"key_4\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "99b0c195-602f-4681-b6a4-c36375dd5d14",
+              "name": "Authentication failed or the API key is missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inference-pipelines",
+                    ":inferencePipelineId",
+                    "rows"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "inferencePipelineId",
+                      "description": "(Required) The unique identifier of the inference pipeline."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"config\": {\n    \"inputVariableNames\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"outputColumnName\": \"<string>\",\n    \"groundTruthColumnName\": \"<string>\",\n    \"numOfTokenColumnName\": \"<string>\",\n    \"costColumnName\": \"<string>\",\n    \"latencyColumnName\": \"<string>\",\n    \"timestampColumnName\": \"<string>\",\n    \"inferenceIdColumnName\": \"<string>\",\n    \"contextColumnName\": \"<string>\",\n    \"questionColumnName\": \"<string>\",\n    \"prompt\": [\n      {\n        \"role\": \"<string>\",\n        \"content\": \"<string>\"\n      },\n      {\n        \"role\": \"<string>\",\n        \"content\": \"<string>\"\n      }\n    ]\n  },\n  \"rows\": [\n    {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\",\n      \"key_2\": \"string\",\n      \"key_3\": true\n    },\n    {\n      \"key_0\": \"string\",\n      \"key_1\": 4638.395652381883,\n      \"key_2\": 7083,\n      \"key_3\": false,\n      \"key_4\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "10cb3645-4ead-468d-a338-012fa51ff3b1",
+          "name": "Update an inference pipeline row",
+          "request": {
+            "name": "Update an inference pipeline row",
+            "description": {
+              "content": "Update a previously published row, for example to attach ground truth.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "inference-pipelines",
+                ":inferencePipelineId",
+                "rows"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "inferencePipelineId",
+                  "description": "(Required) The unique identifier of the inference pipeline."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"inferenceId\": \"<string>\",\n  \"row\": {\n    \"key_0\": 4687,\n    \"key_1\": \"string\"\n  },\n  \"config\": {\n    \"inputVariableNames\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"outputColumnName\": \"<string>\",\n    \"groundTruthColumnName\": \"<string>\",\n    \"numOfTokenColumnName\": \"<string>\",\n    \"costColumnName\": \"<string>\",\n    \"latencyColumnName\": \"<string>\",\n    \"timestampColumnName\": \"<string>\",\n    \"inferenceIdColumnName\": \"<string>\",\n    \"contextColumnName\": \"<string>\",\n    \"questionColumnName\": \"<string>\",\n    \"prompt\": [\n      {\n        \"role\": \"<string>\",\n        \"content\": \"<string>\"\n      },\n      {\n        \"role\": \"<string>\",\n        \"content\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0feecfb0-ff5d-4be1-b4e9-07878ec0444d",
+              "name": "Row updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inference-pipelines",
+                    ":inferencePipelineId",
+                    "rows"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "inferencePipelineId",
+                      "description": "(Required) The unique identifier of the inference pipeline."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inferenceId\": \"<string>\",\n  \"row\": {\n    \"key_0\": \"string\",\n    \"key_1\": 4174.595216838241\n  },\n  \"config\": {\n    \"inputVariableNames\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"outputColumnName\": \"<string>\",\n    \"groundTruthColumnName\": \"<string>\",\n    \"numOfTokenColumnName\": \"<string>\",\n    \"costColumnName\": \"<string>\",\n    \"latencyColumnName\": \"<string>\",\n    \"timestampColumnName\": \"<string>\",\n    \"inferenceIdColumnName\": \"<string>\",\n    \"contextColumnName\": \"<string>\",\n    \"questionColumnName\": \"<string>\",\n    \"prompt\": [\n      {\n        \"role\": \"<string>\",\n        \"content\": \"<string>\"\n      },\n      {\n        \"role\": \"<string>\",\n        \"content\": \"<string>\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"inferenceId\": \"string\",\n  \"row\": {\n    \"key_0\": 8884.147846786978,\n    \"key_1\": 5356.213689967291,\n    \"key_2\": 6669.92793966617\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4d8c6ee7-6802-478a-975a-5f6a3f5fa2cc",
+              "name": "Authentication failed or the API key is missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inference-pipelines",
+                    ":inferencePipelineId",
+                    "rows"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "inferencePipelineId",
+                      "description": "(Required) The unique identifier of the inference pipeline."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"inferenceId\": \"<string>\",\n  \"row\": {\n    \"key_0\": \"string\",\n    \"key_1\": 4174.595216838241\n  },\n  \"config\": {\n    \"inputVariableNames\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"outputColumnName\": \"<string>\",\n    \"groundTruthColumnName\": \"<string>\",\n    \"numOfTokenColumnName\": \"<string>\",\n    \"costColumnName\": \"<string>\",\n    \"latencyColumnName\": \"<string>\",\n    \"timestampColumnName\": \"<string>\",\n    \"inferenceIdColumnName\": \"<string>\",\n    \"contextColumnName\": \"<string>\",\n    \"questionColumnName\": \"<string>\",\n    \"prompt\": [\n      {\n        \"role\": \"<string>\",\n        \"content\": \"<string>\"\n      },\n      {\n        \"role\": \"<string>\",\n        \"content\": \"<string>\"\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3bc70644-c1c3-4270-9dc1-b8a2af1cf033",
+          "name": "Retrieve an inference pipeline row",
+          "request": {
+            "name": "Retrieve an inference pipeline row",
+            "description": {},
+            "url": {
+              "path": [
+                "inference-pipelines",
+                ":inferencePipelineId",
+                "rows",
+                ":inferenceId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "inferencePipelineId",
+                  "description": "(Required) The unique identifier of the inference pipeline."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "inferenceId",
+                  "description": "(Required) The unique identifier of a streamed inference row."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8afa92ef-b12c-4e7e-be13-79c946de1145",
+              "name": "The requested row.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inference-pipelines",
+                    ":inferencePipelineId",
+                    "rows",
+                    ":inferenceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "inferencePipelineId",
+                      "description": "(Required) The unique identifier of the inference pipeline."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inferenceId",
+                      "description": "(Required) The unique identifier of a streamed inference row."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"inferenceId\": \"string\",\n  \"row\": {\n    \"key_0\": 8884.147846786978,\n    \"key_1\": 5356.213689967291,\n    \"key_2\": 6669.92793966617\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "729640e5-336d-4e4f-9b91-a8c2dbf3b279",
+              "name": "Authentication failed or the API key is missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inference-pipelines",
+                    ":inferencePipelineId",
+                    "rows",
+                    ":inferenceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "inferencePipelineId",
+                      "description": "(Required) The unique identifier of the inference pipeline."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inferenceId",
+                      "description": "(Required) The unique identifier of a streamed inference row."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7aeb2cd1-8be7-4d6a-a56c-58aab32b475a",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inference-pipelines",
+                    ":inferencePipelineId",
+                    "rows",
+                    ":inferenceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "inferencePipelineId",
+                      "description": "(Required) The unique identifier of the inference pipeline."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inferenceId",
+                      "description": "(Required) The unique identifier of a streamed inference row."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f928b0bf-9559-4d09-9dac-a5f9a873bea2",
+          "name": "Delete an inference pipeline row",
+          "request": {
+            "name": "Delete an inference pipeline row",
+            "description": {},
+            "url": {
+              "path": [
+                "inference-pipelines",
+                ":inferencePipelineId",
+                "rows",
+                ":inferenceId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "inferencePipelineId",
+                  "description": "(Required) The unique identifier of the inference pipeline."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "inferenceId",
+                  "description": "(Required) The unique identifier of a streamed inference row."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8ffd0e1b-364f-4ee4-bc76-c248ef65d626",
+              "name": "Row deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inference-pipelines",
+                    ":inferencePipelineId",
+                    "rows",
+                    ":inferenceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "inferencePipelineId",
+                      "description": "(Required) The unique identifier of the inference pipeline."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inferenceId",
+                      "description": "(Required) The unique identifier of a streamed inference row."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "70f7a1db-0a80-43cf-8e45-dc36fea84025",
+              "name": "Authentication failed or the API key is missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inference-pipelines",
+                    ":inferencePipelineId",
+                    "rows",
+                    ":inferenceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "inferencePipelineId",
+                      "description": "(Required) The unique identifier of the inference pipeline."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inferenceId",
+                      "description": "(Required) The unique identifier of a streamed inference row."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5bb5db0f-a3e9-4ed0-8848-29e8207e0ae8",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inference-pipelines",
+                    ":inferencePipelineId",
+                    "rows",
+                    ":inferenceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "inferencePipelineId",
+                      "description": "(Required) The unique identifier of the inference pipeline."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "inferenceId",
+                      "description": "(Required) The unique identifier of a streamed inference row."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "81907727-c965-4464-8f6a-f4a1162a8177",
+          "name": "List inference pipeline test results",
+          "request": {
+            "name": "List inference pipeline test results",
+            "description": {},
+            "url": {
+              "path": [
+                "inference-pipelines",
+                ":inferencePipelineId",
+                "results"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "inferencePipelineId",
+                  "description": "(Required) The unique identifier of the inference pipeline."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fff9eab8-783c-42e6-93dd-aee18f972f05",
+              "name": "A list of test results.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inference-pipelines",
+                    ":inferencePipelineId",
+                    "results"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "inferencePipelineId",
+                      "description": "(Required) The unique identifier of the inference pipeline."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"id\": \"00d6b2d3-0cc1-1174-cceb-838341cef485\",\n      \"status\": \"string\",\n      \"projectVersionId\": \"dbf0d263-d003-b442-a649-2774e794179b\",\n      \"inferencePipelineId\": \"5ae09689-6710-04bb-a3b4-1159b8bac2da\",\n      \"statusMessage\": \"string\",\n      \"dateCreated\": \"1967-08-11T20:35:32.432Z\",\n      \"dateUpdated\": \"1989-02-28T04:13:43.259Z\",\n      \"dateDataStarts\": \"2002-11-13T12:48:53.307Z\",\n      \"dateDataEnds\": \"2014-08-21T09:46:55.578Z\",\n      \"goal\": {\n        \"id\": \"bac7dfae-eee3-9ba3-a076-f8101c82c7eb\",\n        \"name\": \"string\",\n        \"type\": \"string\",\n        \"projectVersionId\": \"ba5d23e2-c1f3-f629-eec6-80540574f12f\",\n        \"description\": \"string\",\n        \"subtype\": \"string\",\n        \"archived\": true,\n        \"dateCreated\": \"2013-04-26T11:52:35.681Z\",\n        \"dateUpdated\": \"1957-02-22T14:23:51.020Z\",\n        \"creatorId\": \"c6ed529f-404b-04a1-5887-3419ee4400bc\",\n        \"usesMlModel\": false,\n        \"usesValidationDataset\": false,\n        \"usesTrainingDataset\": true,\n        \"usesProductionData\": true,\n        \"thresholds\": [\n          {\n            \"measurement\": \"string\",\n            \"operator\": \"string\",\n            \"value\": 2260.4206471687826\n          },\n          {\n            \"measurement\": \"string\",\n            \"operator\": \"string\",\n            \"value\": 7890.782178519862\n          }\n        ]\n      },\n      \"goalId\": \"0234ffc5-f3a8-e56b-1dcd-f2628f907f38\"\n    },\n    {\n      \"id\": \"fd1068fd-2cd5-2796-5f0a-bde0e42938b4\",\n      \"status\": \"string\",\n      \"projectVersionId\": \"78d6e6f1-b959-d566-584d-a49646e2a0a2\",\n      \"inferencePipelineId\": \"55e8f303-c51f-844c-1daa-37d98422a14d\",\n      \"statusMessage\": \"string\",\n      \"dateCreated\": \"2006-10-13T12:34:30.137Z\",\n      \"dateUpdated\": \"1974-12-21T09:08:59.636Z\",\n      \"dateDataStarts\": \"1990-10-04T22:07:26.522Z\",\n      \"dateDataEnds\": \"2008-02-25T21:42:19.588Z\",\n      \"goal\": {\n        \"id\": \"64bc5c7a-9eb0-107a-0437-2d211150d178\",\n        \"name\": \"string\",\n        \"type\": \"string\",\n        \"projectVersionId\": \"022e73c3-3ace-08dd-8f00-4439449f897b\",\n        \"description\": \"string\",\n        \"subtype\": \"string\",\n        \"archived\": false,\n        \"dateCreated\": \"1988-11-12T18:48:22.510Z\",\n        \"dateUpdated\": \"1986-11-12T14:27:26.123Z\",\n        \"creatorId\": \"7ddacf78-0063-4240-e4c7-8b51f4b0aaa7\",\n        \"usesMlModel\": false,\n        \"usesValidationDataset\": true,\n        \"usesTrainingDataset\": true,\n        \"usesProductionData\": false,\n        \"thresholds\": [\n          {\n            \"measurement\": \"string\",\n            \"operator\": \"string\",\n            \"value\": 3309.4634498805685\n          },\n          {\n            \"measurement\": \"string\",\n            \"operator\": \"string\",\n            \"value\": 4062.3301173558766\n          }\n        ]\n      },\n      \"goalId\": \"4c7f3036-681e-98e8-235a-30eea66f397e\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a44911fe-9043-4d3a-b103-7ad28d894ad3",
+              "name": "Authentication failed or the API key is missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inference-pipelines",
+                    ":inferencePipelineId",
+                    "results"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "inferencePipelineId",
+                      "description": "(Required) The unique identifier of the inference pipeline."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.openlayer.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a8630003-5b12-48d2-9319-5fb53c910673",
+    "name": "Openlayer Commits Inference Pipelines API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Openlayer REST API for AI evaluation, testing, and observability. Manage projects, commit model versions and datasets, run and evaluate tests, create inference pipelines for production monitoring, and stream production inference data into Openlayer. All requests are authenticated with a Bearer API key.\n\nContact Support:\n Name: Openlayer Support\n Email: support@openlayer.com",
+      "type": "text/plain"
+    }
+  }
+}

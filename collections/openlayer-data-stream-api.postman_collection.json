@@ -1,0 +1,282 @@
+{
+  "item": [
+    {
+      "id": "3d71028f-8b0f-4767-86c9-8be51c547856",
+      "name": "Data Stream",
+      "description": {
+        "content": "Publish production inference data to a pipeline.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7b288ad8-8314-4d9f-b03f-7511d8ae62ca",
+          "name": "Stream production data",
+          "request": {
+            "name": "Stream production data",
+            "description": {
+              "content": "Publish production inference data (rows) to an inference pipeline. The config object maps the columns in each row to Openlayer concepts such as input variables, output, ground truth, latency, cost, and token counts.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "inference-pipelines",
+                ":inferencePipelineId",
+                "data-stream"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "inferencePipelineId",
+                  "description": "(Required) The unique identifier of the inference pipeline."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"config\": {\n    \"inputVariableNames\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"outputColumnName\": \"<string>\",\n    \"groundTruthColumnName\": \"<string>\",\n    \"numOfTokenColumnName\": \"<string>\",\n    \"costColumnName\": \"<string>\",\n    \"latencyColumnName\": \"<string>\",\n    \"timestampColumnName\": \"<string>\",\n    \"inferenceIdColumnName\": \"<string>\",\n    \"contextColumnName\": \"<string>\",\n    \"questionColumnName\": \"<string>\",\n    \"prompt\": [\n      {\n        \"role\": \"<string>\",\n        \"content\": \"<string>\"\n      },\n      {\n        \"role\": \"<string>\",\n        \"content\": \"<string>\"\n      }\n    ]\n  },\n  \"rows\": [\n    {\n      \"key_0\": \"string\"\n    },\n    {\n      \"key_0\": \"string\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cfd1b953-b3da-4776-8f88-2992184c9b15",
+              "name": "Data accepted for ingestion.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inference-pipelines",
+                    ":inferencePipelineId",
+                    "data-stream"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "inferencePipelineId",
+                      "description": "(Required) The unique identifier of the inference pipeline."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"config\": {\n    \"inputVariableNames\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"outputColumnName\": \"<string>\",\n    \"groundTruthColumnName\": \"<string>\",\n    \"numOfTokenColumnName\": \"<string>\",\n    \"costColumnName\": \"<string>\",\n    \"latencyColumnName\": \"<string>\",\n    \"timestampColumnName\": \"<string>\",\n    \"inferenceIdColumnName\": \"<string>\",\n    \"contextColumnName\": \"<string>\",\n    \"questionColumnName\": \"<string>\",\n    \"prompt\": [\n      {\n        \"role\": \"<string>\",\n        \"content\": \"<string>\"\n      },\n      {\n        \"role\": \"<string>\",\n        \"content\": \"<string>\"\n      }\n    ]\n  },\n  \"rows\": [\n    {\n      \"key_0\": false,\n      \"key_1\": \"string\",\n      \"key_2\": 2756.839514822366\n    },\n    {\n      \"key_0\": false,\n      \"key_1\": 6172.540721574478\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "405e963e-e276-4645-9139-fd6e61213773",
+              "name": "Authentication failed or the API key is missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inference-pipelines",
+                    ":inferencePipelineId",
+                    "data-stream"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "inferencePipelineId",
+                      "description": "(Required) The unique identifier of the inference pipeline."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"config\": {\n    \"inputVariableNames\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"outputColumnName\": \"<string>\",\n    \"groundTruthColumnName\": \"<string>\",\n    \"numOfTokenColumnName\": \"<string>\",\n    \"costColumnName\": \"<string>\",\n    \"latencyColumnName\": \"<string>\",\n    \"timestampColumnName\": \"<string>\",\n    \"inferenceIdColumnName\": \"<string>\",\n    \"contextColumnName\": \"<string>\",\n    \"questionColumnName\": \"<string>\",\n    \"prompt\": [\n      {\n        \"role\": \"<string>\",\n        \"content\": \"<string>\"\n      },\n      {\n        \"role\": \"<string>\",\n        \"content\": \"<string>\"\n      }\n    ]\n  },\n  \"rows\": [\n    {\n      \"key_0\": false,\n      \"key_1\": \"string\",\n      \"key_2\": 2756.839514822366\n    },\n    {\n      \"key_0\": false,\n      \"key_1\": 6172.540721574478\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2d81d725-2999-420d-ac41-680271ca81b1",
+              "name": "The request body failed validation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "inference-pipelines",
+                    ":inferencePipelineId",
+                    "data-stream"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "inferencePipelineId",
+                      "description": "(Required) The unique identifier of the inference pipeline."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"config\": {\n    \"inputVariableNames\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"outputColumnName\": \"<string>\",\n    \"groundTruthColumnName\": \"<string>\",\n    \"numOfTokenColumnName\": \"<string>\",\n    \"costColumnName\": \"<string>\",\n    \"latencyColumnName\": \"<string>\",\n    \"timestampColumnName\": \"<string>\",\n    \"inferenceIdColumnName\": \"<string>\",\n    \"contextColumnName\": \"<string>\",\n    \"questionColumnName\": \"<string>\",\n    \"prompt\": [\n      {\n        \"role\": \"<string>\",\n        \"content\": \"<string>\"\n      },\n      {\n        \"role\": \"<string>\",\n        \"content\": \"<string>\"\n      }\n    ]\n  },\n  \"rows\": [\n    {\n      \"key_0\": false,\n      \"key_1\": \"string\",\n      \"key_2\": 2756.839514822366\n    },\n    {\n      \"key_0\": false,\n      \"key_1\": 6172.540721574478\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.openlayer.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "08776d63-734a-4dbf-b908-c0f33229e64f",
+    "name": "Openlayer Commits Data Stream API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Openlayer REST API for AI evaluation, testing, and observability. Manage projects, commit model versions and datasets, run and evaluate tests, create inference pipelines for production monitoring, and stream production inference data into Openlayer. All requests are authenticated with a Bearer API key.\n\nContact Support:\n Name: Openlayer Support\n Email: support@openlayer.com",
+      "type": "text/plain"
+    }
+  }
+}
