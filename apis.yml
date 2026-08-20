@@ -22,6 +22,13 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/openlayer.png
 tags:
+- Artificial Intelligence
+- Evaluation
+- Testing
+- Observability
+- LLM
+- MLOps
+tags_raw:
 - AI
 - Evaluation
 - Testing
@@ -58,6 +65,8 @@ apis:
   humanURL: https://www.openlayer.com/docs/api-reference/rest/overview
   baseURL: https://api.openlayer.com/v1
   tags:
+  - Datastream
+  tags_raw:
   - Data Stream
   properties:
   - type: OpenAPI
@@ -98,6 +107,8 @@ apis:
   humanURL: https://www.openlayer.com/docs/api-reference/rest/overview
   baseURL: https://api.openlayer.com/v1
   tags:
+  - Project
+  tags_raw:
   - Projects
   properties:
   - type: OpenAPI
