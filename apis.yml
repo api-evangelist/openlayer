@@ -77,7 +77,7 @@ apis:
   humanURL: https://www.openlayer.com/docs/api-reference/rest/overview
   baseURL: https://api.openlayer.com/v1
   tags:
-  - Data Stream
+  - Datastream
   tags_raw:
   - Data Stream
   properties:
