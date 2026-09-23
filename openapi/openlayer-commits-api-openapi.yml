@@ -1,4 +1,4 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
   title: Openlayer Commits API
   description: The Openlayer REST API for AI evaluation, testing, and observability. Manage projects, commit model versions and datasets, run and evaluate tests, create inference pipelines for production monitoring, and stream production inference data into Openlayer. All requests are authenticated with a Bearer API key.
@@ -133,73 +133,7 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  parameters:
-    ProjectId:
-      name: projectId
-      in: path
-      required: true
-      description: The unique identifier of the project.
-      schema:
-        type: string
-        format: uuid
-    ProjectVersionId:
-      name: projectVersionId
-      in: path
-      required: true
-      description: The unique identifier of the project version (commit).
-      schema:
-        type: string
-        format: uuid
   schemas:
-    Commit:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        projectId:
-          type: string
-          format: uuid
-        status:
-          type: string
-          description: Commit status, e.g. queued, running, paused, failed, completed, unknown.
-        statusMessage:
-          type: string
-          nullable: true
-        commit:
-          type: object
-          properties:
-            id:
-              type: string
-            authorId:
-              type: string
-              nullable: true
-            message:
-              type: string
-            dateCreated:
-              type: string
-              format: date-time
-        dateCreated:
-          type: string
-          format: date-time
-        passingGoalCount:
-          type: integer
-          nullable: true
-        failingGoalCount:
-          type: integer
-          nullable: true
-        totalGoalCount:
-          type: integer
-          nullable: true
-        links:
-          type: object
-          properties:
-            app:
-              type: string
-      required:
-      - id
-      - projectId
-      - status
     CommitList:
       type: object
       properties:
@@ -207,6 +141,37 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Commit'
+    CreateCommitRequest:
+      type: object
+      properties:
+        commit:
+          type: object
+          properties:
+            message:
+              type: string
+          required:
+          - message
+        storageUri:
+          type: string
+          description: The storage URI (e.g. s3://...) where the committed bundle was uploaded.
+        archived:
+          type:
+          - boolean
+          - 'null'
+        deploymentStatus:
+          type:
+          - string
+          - 'null'
+      required:
+      - commit
+      - storageUri
+    TestResultList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/TestResult'
     TestResult:
       type: object
       properties:
@@ -214,19 +179,22 @@ components:
           type: string
           format: uuid
         projectVersionId:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
-          nullable: true
         inferencePipelineId:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
-          nullable: true
         status:
           type: string
           description: Result status, e.g. running, passing, failing, skipped, error.
         statusMessage:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         dateCreated:
           type: string
           format: date-time
@@ -234,19 +202,22 @@ components:
           type: string
           format: date-time
         dateDataStarts:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
         dateDataEnds:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
         goal:
           $ref: '#/components/schemas/Test'
         goalId:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
-          nullable: true
       required:
       - id
       - status
@@ -257,20 +228,23 @@ components:
           type: string
           format: uuid
         projectVersionId:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
-          nullable: true
         name:
           type: string
         description:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         type:
           type: string
           description: The test type (integrity, consistency, performance).
         subtype:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         archived:
           type: boolean
         dateCreated:
@@ -280,21 +254,26 @@ components:
           type: string
           format: date-time
         creatorId:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
-          nullable: true
         usesMlModel:
-          type: boolean
-          nullable: true
+          type:
+          - boolean
+          - 'null'
         usesValidationDataset:
-          type: boolean
-          nullable: true
+          type:
+          - boolean
+          - 'null'
         usesTrainingDataset:
-          type: boolean
-          nullable: true
+          type:
+          - boolean
+          - 'null'
         usesProductionData:
-          type: boolean
-          nullable: true
+          type:
+          - boolean
+          - 'null'
         thresholds:
           type: array
           items:
@@ -315,35 +294,6 @@ components:
       - id
       - name
       - type
-    CreateCommitRequest:
-      type: object
-      properties:
-        commit:
-          type: object
-          properties:
-            message:
-              type: string
-          required:
-          - message
-        storageUri:
-          type: string
-          description: The storage URI (e.g. s3://...) where the committed bundle was uploaded.
-        archived:
-          type: boolean
-          nullable: true
-        deploymentStatus:
-          type: string
-          nullable: true
-      required:
-      - commit
-      - storageUri
-    TestResultList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/TestResult'
     Error:
       type: object
       properties:
@@ -353,6 +303,77 @@ components:
           type: string
       required:
       - message
+    Commit:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        projectId:
+          type: string
+          format: uuid
+        status:
+          type: string
+          description: Commit status, e.g. queued, running, paused, failed, completed, unknown.
+        statusMessage:
+          type:
+          - string
+          - 'null'
+        commit:
+          type: object
+          properties:
+            id:
+              type: string
+            authorId:
+              type:
+              - string
+              - 'null'
+            message:
+              type: string
+            dateCreated:
+              type: string
+              format: date-time
+        dateCreated:
+          type: string
+          format: date-time
+        passingGoalCount:
+          type:
+          - integer
+          - 'null'
+        failingGoalCount:
+          type:
+          - integer
+          - 'null'
+        totalGoalCount:
+          type:
+          - integer
+          - 'null'
+        links:
+          type: object
+          properties:
+            app:
+              type: string
+      required:
+      - id
+      - projectId
+      - status
+  parameters:
+    ProjectVersionId:
+      name: projectVersionId
+      in: path
+      required: true
+      description: The unique identifier of the project version (commit).
+      schema:
+        type: string
+        format: uuid
+    ProjectId:
+      name: projectId
+      in: path
+      required: true
+      description: The unique identifier of the project.
+      schema:
+        type: string
+        format: uuid
   securitySchemes:
     api_key:
       type: http

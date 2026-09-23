@@ -1,12 +1,7 @@
 {
   "provider": "openlayer",
   "sources": [
-    "openlayer-commits-api-openapi.yml",
-    "openlayer-data-stream-api-openapi.yml",
-    "openlayer-inference-pipelines-api-openapi.yml",
-    "openlayer-projects-api-openapi.yml",
-    "openlayer-storage-api-openapi.yml",
-    "openlayer-tests-api-openapi.yml"
+    "_original/openlayer-openapi.yml"
   ],
   "outputs": [
     "openlayer-commits-api-openapi.yml",
@@ -19,6 +14,17 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "openlayer-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "openlayer-commits-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "openlayer-data-stream-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "openlayer-inference-pipelines-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "openlayer-projects-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "openlayer-storage-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "openlayer-tests-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
