@@ -120,19 +120,23 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    Unauthorized:
-      description: Authentication failed or the API key is missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+  parameters:
+    ProjectVersionId:
+      name: projectVersionId
+      in: path
+      required: true
+      description: The unique identifier of the project version (commit).
+      schema:
+        type: string
+        format: uuid
+    ProjectId:
+      name: projectId
+      in: path
+      required: true
+      description: The unique identifier of the project.
+      schema:
+        type: string
+        format: uuid
   schemas:
     CommitList:
       type: object
@@ -141,37 +145,69 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Commit'
-    CreateCommitRequest:
+    Commit:
       type: object
       properties:
-        commit:
-          type: object
-          properties:
-            message:
-              type: string
-          required:
-          - message
-        storageUri:
+        id:
           type: string
-          description: The storage URI (e.g. s3://...) where the committed bundle was uploaded.
-        archived:
-          type:
-          - boolean
-          - 'null'
-        deploymentStatus:
+          format: uuid
+        projectId:
+          type: string
+          format: uuid
+        status:
+          type: string
+          description: Commit status, e.g. queued, running, paused, failed, completed, unknown.
+        statusMessage:
           type:
           - string
           - 'null'
+        commit:
+          type: object
+          properties:
+            id:
+              type: string
+            authorId:
+              type:
+              - string
+              - 'null'
+            message:
+              type: string
+            dateCreated:
+              type: string
+              format: date-time
+        dateCreated:
+          type: string
+          format: date-time
+        passingGoalCount:
+          type:
+          - integer
+          - 'null'
+        failingGoalCount:
+          type:
+          - integer
+          - 'null'
+        totalGoalCount:
+          type:
+          - integer
+          - 'null'
+        links:
+          type: object
+          properties:
+            app:
+              type: string
       required:
-      - commit
-      - storageUri
-    TestResultList:
+      - id
+      - projectId
+      - status
+    Error:
       type: object
       properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/TestResult'
+        code:
+          type: string
+        message:
+          type: string
+      required:
+      - message
     TestResult:
       type: object
       properties:
@@ -294,86 +330,50 @@ components:
       - id
       - name
       - type
-    Error:
+    TestResultList:
       type: object
       properties:
-        code:
-          type: string
-        message:
-          type: string
-      required:
-      - message
-    Commit:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/TestResult'
+    CreateCommitRequest:
       type: object
       properties:
-        id:
-          type: string
-          format: uuid
-        projectId:
-          type: string
-          format: uuid
-        status:
-          type: string
-          description: Commit status, e.g. queued, running, paused, failed, completed, unknown.
-        statusMessage:
-          type:
-          - string
-          - 'null'
         commit:
           type: object
           properties:
-            id:
-              type: string
-            authorId:
-              type:
-              - string
-              - 'null'
             message:
               type: string
-            dateCreated:
-              type: string
-              format: date-time
-        dateCreated:
+          required:
+          - message
+        storageUri:
           type: string
-          format: date-time
-        passingGoalCount:
+          description: The storage URI (e.g. s3://...) where the committed bundle was uploaded.
+        archived:
           type:
-          - integer
+          - boolean
           - 'null'
-        failingGoalCount:
+        deploymentStatus:
           type:
-          - integer
+          - string
           - 'null'
-        totalGoalCount:
-          type:
-          - integer
-          - 'null'
-        links:
-          type: object
-          properties:
-            app:
-              type: string
       required:
-      - id
-      - projectId
-      - status
-  parameters:
-    ProjectVersionId:
-      name: projectVersionId
-      in: path
-      required: true
-      description: The unique identifier of the project version (commit).
-      schema:
-        type: string
-        format: uuid
-    ProjectId:
-      name: projectId
-      in: path
-      required: true
-      description: The unique identifier of the project.
-      schema:
-        type: string
-        format: uuid
+      - commit
+      - storageUri
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed or the API key is missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     api_key:
       type: http

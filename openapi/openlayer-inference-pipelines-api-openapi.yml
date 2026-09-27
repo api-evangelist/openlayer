@@ -240,67 +240,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    InferencePipeline:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        projectId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-        name:
-          type: string
-        description:
-          type:
-          - string
-          - 'null'
-        dateCreated:
-          type: string
-          format: date-time
-        dateUpdated:
-          type: string
-          format: date-time
-        dateLastSampleReceived:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        dateLastEvaluated:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        passingGoalCount:
-          type:
-          - integer
-          - 'null'
-        failingGoalCount:
-          type:
-          - integer
-          - 'null'
-        totalGoalCount:
-          type:
-          - integer
-          - 'null'
-        status:
-          type:
-          - string
-          - 'null'
-        statusMessage:
-          type:
-          - string
-          - 'null'
-        links:
-          type: object
-          properties:
-            app:
-              type: string
-      required:
-      - id
-      - name
     InferencePipelineList:
       type: object
       properties:
@@ -308,14 +247,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/InferencePipeline'
-    Row:
-      type: object
-      properties:
-        inferenceId:
-          type: string
-        row:
-          type: object
-          additionalProperties: true
     DataStreamRequest:
       type: object
       properties:
@@ -330,13 +261,12 @@ components:
       required:
       - config
       - rows
-    TestResultList:
+    DataStreamResponse:
       type: object
       properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/TestResult'
+        success:
+          type: string
+          description: Indicates the data was accepted (e.g. "success").
     UpdateRowRequest:
       type: object
       properties:
@@ -350,19 +280,15 @@ components:
       required:
       - inferenceId
       - row
-    UpdateInferencePipelineRequest:
+    Error:
       type: object
       properties:
-        name:
+        code:
           type: string
-        description:
-          type:
-          - string
-          - 'null'
-        referenceDatasetUri:
-          type:
-          - string
-          - 'null'
+        message:
+          type: string
+      required:
+      - message
     TestResult:
       type: object
       properties:
@@ -412,6 +338,14 @@ components:
       required:
       - id
       - status
+    Row:
+      type: object
+      properties:
+        inferenceId:
+          type: string
+        row:
+          type: object
+          additionalProperties: true
     Test:
       type: object
       properties:
@@ -485,21 +419,96 @@ components:
       - id
       - name
       - type
-    Error:
+    TestResultList:
       type: object
       properties:
-        code:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/TestResult'
+    UpdateInferencePipelineRequest:
+      type: object
+      properties:
+        name:
           type: string
-        message:
+        description:
+          type:
+          - string
+          - 'null'
+        referenceDatasetUri:
+          type:
+          - string
+          - 'null'
+    InferencePipeline:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        projectId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        name:
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
+        dateCreated:
+          type: string
+          format: date-time
+        dateUpdated:
+          type: string
+          format: date-time
+        dateLastSampleReceived:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        dateLastEvaluated:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        passingGoalCount:
+          type:
+          - integer
+          - 'null'
+        failingGoalCount:
+          type:
+          - integer
+          - 'null'
+        totalGoalCount:
+          type:
+          - integer
+          - 'null'
+        status:
+          type:
+          - string
+          - 'null'
+        statusMessage:
+          type:
+          - string
+          - 'null'
+        links:
+          type: object
+          properties:
+            app:
+              type: string
+      required:
+      - id
+      - name
+    CreateInferencePipelineRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
           type: string
       required:
-      - message
-    DataStreamResponse:
-      type: object
-      properties:
-        success:
-          type: string
-          description: Indicates the data was accepted (e.g. "success").
+      - name
     DataStreamConfig:
       type: object
       description: Maps the columns present in each streamed row to Openlayer concepts. The exact fields depend on the project task type (LLM vs tabular).
@@ -564,16 +573,28 @@ components:
                 type: string
               content:
                 type: string
-    CreateInferencePipelineRequest:
-      type: object
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-      required:
-      - name
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed or the API key is missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
+    ProjectId:
+      name: projectId
+      in: path
+      required: true
+      description: The unique identifier of the project.
+      schema:
+        type: string
+        format: uuid
     InferenceId:
       name: inferenceId
       in: path
@@ -589,27 +610,6 @@ components:
       schema:
         type: string
         format: uuid
-    ProjectId:
-      name: projectId
-      in: path
-      required: true
-      description: The unique identifier of the project.
-      schema:
-        type: string
-        format: uuid
-  responses:
-    Unauthorized:
-      description: Authentication failed or the API key is missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     api_key:
       type: http

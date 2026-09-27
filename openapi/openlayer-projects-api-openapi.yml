@@ -97,26 +97,19 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   responses:
-    Unauthorized:
-      description: Authentication failed or the API key is missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     NotFound:
       description: The requested resource was not found.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed or the API key is missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    ProjectList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Project'
     Error:
       type: object
       properties:
@@ -126,19 +119,6 @@ components:
           type: string
       required:
       - message
-    CreateProjectRequest:
-      type: object
-      properties:
-        name:
-          type: string
-        taskType:
-          type: string
-          description: The task type, e.g. llm-base, tabular-classification, text-classification.
-        description:
-          type: string
-      required:
-      - name
-      - taskType
     Project:
       type: object
       properties:
@@ -189,6 +169,26 @@ components:
               type: string
       required:
       - id
+      - name
+      - taskType
+    ProjectList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Project'
+    CreateProjectRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        taskType:
+          type: string
+          description: The task type, e.g. llm-base, tabular-classification, text-classification.
+        description:
+          type: string
+      required:
       - name
       - taskType
   parameters:
