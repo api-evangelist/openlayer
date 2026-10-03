@@ -239,7 +239,40 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  parameters:
+    ProjectId:
+      name: projectId
+      in: path
+      required: true
+      description: The unique identifier of the project.
+      schema:
+        type: string
+        format: uuid
+    InferencePipelineId:
+      name: inferencePipelineId
+      in: path
+      required: true
+      description: The unique identifier of the inference pipeline.
+      schema:
+        type: string
+        format: uuid
+    InferenceId:
+      name: inferenceId
+      in: path
+      required: true
+      description: The unique identifier of a streamed inference row.
+      schema:
+        type: string
   schemas:
+    CreateInferencePipelineRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+      required:
+      - name
     InferencePipelineList:
       type: object
       properties:
@@ -247,97 +280,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/InferencePipeline'
-    DataStreamRequest:
-      type: object
-      properties:
-        config:
-          $ref: '#/components/schemas/DataStreamConfig'
-        rows:
-          type: array
-          description: The rows of production data being published.
-          items:
-            type: object
-            additionalProperties: true
-      required:
-      - config
-      - rows
-    DataStreamResponse:
-      type: object
-      properties:
-        success:
-          type: string
-          description: Indicates the data was accepted (e.g. "success").
-    UpdateRowRequest:
-      type: object
-      properties:
-        inferenceId:
-          type: string
-        row:
-          type: object
-          additionalProperties: true
-        config:
-          $ref: '#/components/schemas/DataStreamConfig'
-      required:
-      - inferenceId
-      - row
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-      required:
-      - message
-    TestResult:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        projectVersionId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-        inferencePipelineId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-        status:
-          type: string
-          description: Result status, e.g. running, passing, failing, skipped, error.
-        statusMessage:
-          type:
-          - string
-          - 'null'
-        dateCreated:
-          type: string
-          format: date-time
-        dateUpdated:
-          type: string
-          format: date-time
-        dateDataStarts:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        dateDataEnds:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        goal:
-          $ref: '#/components/schemas/Test'
-        goalId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-      required:
-      - id
-      - status
     Row:
       type: object
       properties:
@@ -346,6 +288,70 @@ components:
         row:
           type: object
           additionalProperties: true
+    DataStreamConfig:
+      type: object
+      description: Maps the columns present in each streamed row to Openlayer concepts. The exact fields depend on the project task type (LLM vs tabular).
+      properties:
+        inputVariableNames:
+          type: array
+          items:
+            type: string
+          description: Names of the columns that are input variables to the model.
+        outputColumnName:
+          type:
+          - string
+          - 'null'
+          description: Name of the column containing the model output.
+        groundTruthColumnName:
+          type:
+          - string
+          - 'null'
+          description: Name of the column containing ground truth labels.
+        numOfTokenColumnName:
+          type:
+          - string
+          - 'null'
+          description: Name of the column containing token counts.
+        costColumnName:
+          type:
+          - string
+          - 'null'
+          description: Name of the column containing the request cost.
+        latencyColumnName:
+          type:
+          - string
+          - 'null'
+          description: Name of the column containing latency in milliseconds.
+        timestampColumnName:
+          type:
+          - string
+          - 'null'
+          description: Name of the column containing the UNIX timestamp.
+        inferenceIdColumnName:
+          type:
+          - string
+          - 'null'
+          description: Name of the column containing a unique inference id for the row.
+        contextColumnName:
+          type:
+          - string
+          - 'null'
+          description: Name of the column containing retrieved context (for RAG/LLM tasks).
+        questionColumnName:
+          type:
+          - string
+          - 'null'
+        prompt:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            properties:
+              role:
+                type: string
+              content:
+                type: string
     Test:
       type: object
       properties:
@@ -419,6 +425,78 @@ components:
       - id
       - name
       - type
+    TestResult:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        projectVersionId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        inferencePipelineId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        status:
+          type: string
+          description: Result status, e.g. running, passing, failing, skipped, error.
+        statusMessage:
+          type:
+          - string
+          - 'null'
+        dateCreated:
+          type: string
+          format: date-time
+        dateUpdated:
+          type: string
+          format: date-time
+        dateDataStarts:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        dateDataEnds:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        goal:
+          $ref: '#/components/schemas/Test'
+        goalId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+      required:
+      - id
+      - status
+    DataStreamRequest:
+      type: object
+      properties:
+        config:
+          $ref: '#/components/schemas/DataStreamConfig'
+        rows:
+          type: array
+          description: The rows of production data being published.
+          items:
+            type: object
+            additionalProperties: true
+      required:
+      - config
+      - rows
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+      - message
     TestResultList:
       type: object
       properties:
@@ -426,19 +504,19 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TestResult'
-    UpdateInferencePipelineRequest:
+    UpdateRowRequest:
       type: object
       properties:
-        name:
+        inferenceId:
           type: string
-        description:
-          type:
-          - string
-          - 'null'
-        referenceDatasetUri:
-          type:
-          - string
-          - 'null'
+        row:
+          type: object
+          additionalProperties: true
+        config:
+          $ref: '#/components/schemas/DataStreamConfig'
+      required:
+      - inferenceId
+      - row
     InferencePipeline:
       type: object
       properties:
@@ -500,116 +578,38 @@ components:
       required:
       - id
       - name
-    CreateInferencePipelineRequest:
+    DataStreamResponse:
+      type: object
+      properties:
+        success:
+          type: string
+          description: Indicates the data was accepted (e.g. "success").
+    UpdateInferencePipelineRequest:
       type: object
       properties:
         name:
           type: string
         description:
-          type: string
-      required:
-      - name
-    DataStreamConfig:
-      type: object
-      description: Maps the columns present in each streamed row to Openlayer concepts. The exact fields depend on the project task type (LLM vs tabular).
-      properties:
-        inputVariableNames:
-          type: array
-          items:
-            type: string
-          description: Names of the columns that are input variables to the model.
-        outputColumnName:
           type:
           - string
           - 'null'
-          description: Name of the column containing the model output.
-        groundTruthColumnName:
+        referenceDatasetUri:
           type:
           - string
           - 'null'
-          description: Name of the column containing ground truth labels.
-        numOfTokenColumnName:
-          type:
-          - string
-          - 'null'
-          description: Name of the column containing token counts.
-        costColumnName:
-          type:
-          - string
-          - 'null'
-          description: Name of the column containing the request cost.
-        latencyColumnName:
-          type:
-          - string
-          - 'null'
-          description: Name of the column containing latency in milliseconds.
-        timestampColumnName:
-          type:
-          - string
-          - 'null'
-          description: Name of the column containing the UNIX timestamp.
-        inferenceIdColumnName:
-          type:
-          - string
-          - 'null'
-          description: Name of the column containing a unique inference id for the row.
-        contextColumnName:
-          type:
-          - string
-          - 'null'
-          description: Name of the column containing retrieved context (for RAG/LLM tasks).
-        questionColumnName:
-          type:
-          - string
-          - 'null'
-        prompt:
-          type:
-          - array
-          - 'null'
-          items:
-            type: object
-            properties:
-              role:
-                type: string
-              content:
-                type: string
   responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
     Unauthorized:
       description: Authentication failed or the API key is missing or invalid.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  parameters:
-    ProjectId:
-      name: projectId
-      in: path
-      required: true
-      description: The unique identifier of the project.
-      schema:
-        type: string
-        format: uuid
-    InferenceId:
-      name: inferenceId
-      in: path
-      required: true
-      description: The unique identifier of a streamed inference row.
-      schema:
-        type: string
-    InferencePipelineId:
-      name: inferencePipelineId
-      in: path
-      required: true
-      description: The unique identifier of the inference pipeline.
-      schema:
-        type: string
-        format: uuid
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     api_key:
       type: http

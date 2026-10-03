@@ -121,14 +121,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   parameters:
-    ProjectVersionId:
-      name: projectVersionId
-      in: path
-      required: true
-      description: The unique identifier of the project version (commit).
-      schema:
-        type: string
-        format: uuid
     ProjectId:
       name: projectId
       in: path
@@ -137,14 +129,15 @@ components:
       schema:
         type: string
         format: uuid
+    ProjectVersionId:
+      name: projectVersionId
+      in: path
+      required: true
+      description: The unique identifier of the project version (commit).
+      schema:
+        type: string
+        format: uuid
   schemas:
-    CommitList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Commit'
     Commit:
       type: object
       properties:
@@ -199,64 +192,13 @@ components:
       - id
       - projectId
       - status
-    Error:
+    CommitList:
       type: object
       properties:
-        code:
-          type: string
-        message:
-          type: string
-      required:
-      - message
-    TestResult:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        projectVersionId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-        inferencePipelineId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-        status:
-          type: string
-          description: Result status, e.g. running, passing, failing, skipped, error.
-        statusMessage:
-          type:
-          - string
-          - 'null'
-        dateCreated:
-          type: string
-          format: date-time
-        dateUpdated:
-          type: string
-          format: date-time
-        dateDataStarts:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        dateDataEnds:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        goal:
-          $ref: '#/components/schemas/Test'
-        goalId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-      required:
-      - id
-      - status
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Commit'
     Test:
       type: object
       properties:
@@ -330,6 +272,55 @@ components:
       - id
       - name
       - type
+    TestResult:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        projectVersionId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        inferencePipelineId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        status:
+          type: string
+          description: Result status, e.g. running, passing, failing, skipped, error.
+        statusMessage:
+          type:
+          - string
+          - 'null'
+        dateCreated:
+          type: string
+          format: date-time
+        dateUpdated:
+          type: string
+          format: date-time
+        dateDataStarts:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        dateDataEnds:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        goal:
+          $ref: '#/components/schemas/Test'
+        goalId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+      required:
+      - id
+      - status
     TestResultList:
       type: object
       properties:
@@ -337,6 +328,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TestResult'
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+      - message
     CreateCommitRequest:
       type: object
       properties:
@@ -362,14 +362,14 @@ components:
       - commit
       - storageUri
   responses:
-    NotFound:
-      description: The requested resource was not found.
+    Unauthorized:
+      description: Authentication failed or the API key is missing or invalid.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed or the API key is missing or invalid.
+    NotFound:
+      description: The requested resource was not found.
       content:
         application/json:
           schema:

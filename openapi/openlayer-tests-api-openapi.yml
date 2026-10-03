@@ -128,105 +128,33 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  parameters:
+    ProjectId:
+      name: projectId
+      in: path
+      required: true
+      description: The unique identifier of the project.
+      schema:
+        type: string
+        format: uuid
+    TestId:
+      name: testId
+      in: path
+      required: true
+      description: The unique identifier of the test.
+      schema:
+        type: string
+        format: uuid
   schemas:
-    CreateTestRequest:
+    UpdateTestsRequest:
       type: object
       properties:
-        name:
-          type: string
-        description:
-          type:
-          - string
-          - 'null'
-        type:
-          type: string
-        subtype:
-          type: string
-        thresholds:
-          type: array
-          items:
-            type: object
-            properties:
-              measurement:
-                type: string
-              operator:
-                type: string
-              value:
-                oneOf:
-                - type: number
-                - type: string
-                - type: boolean
-                - type: array
-                  items: {}
-      required:
-      - name
-      - type
-      - thresholds
-    TestList:
-      type: object
-      properties:
-        items:
+        tests:
           type: array
           items:
             $ref: '#/components/schemas/Test'
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
       required:
-      - message
-    TestResult:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        projectVersionId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-        inferencePipelineId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-        status:
-          type: string
-          description: Result status, e.g. running, passing, failing, skipped, error.
-        statusMessage:
-          type:
-          - string
-          - 'null'
-        dateCreated:
-          type: string
-          format: date-time
-        dateUpdated:
-          type: string
-          format: date-time
-        dateDataStarts:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        dateDataEnds:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        goal:
-          $ref: '#/components/schemas/Test'
-        goalId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-      required:
-      - id
-      - status
+      - tests
     Test:
       type: object
       properties:
@@ -300,6 +228,55 @@ components:
       - id
       - name
       - type
+    TestResult:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        projectVersionId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        inferencePipelineId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        status:
+          type: string
+          description: Result status, e.g. running, passing, failing, skipped, error.
+        statusMessage:
+          type:
+          - string
+          - 'null'
+        dateCreated:
+          type: string
+          format: date-time
+        dateUpdated:
+          type: string
+          format: date-time
+        dateDataStarts:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        dateDataEnds:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        goal:
+          $ref: '#/components/schemas/Test'
+        goalId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+      required:
+      - id
+      - status
     TestResultList:
       type: object
       properties:
@@ -307,32 +284,55 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TestResult'
-    UpdateTestsRequest:
+    Error:
       type: object
       properties:
-        tests:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+      - message
+    TestList:
+      type: object
+      properties:
+        items:
           type: array
           items:
             $ref: '#/components/schemas/Test'
+    CreateTestRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
+        type:
+          type: string
+        subtype:
+          type: string
+        thresholds:
+          type: array
+          items:
+            type: object
+            properties:
+              measurement:
+                type: string
+              operator:
+                type: string
+              value:
+                oneOf:
+                - type: number
+                - type: string
+                - type: boolean
+                - type: array
+                  items: {}
       required:
-      - tests
-  parameters:
-    ProjectId:
-      name: projectId
-      in: path
-      required: true
-      description: The unique identifier of the project.
-      schema:
-        type: string
-        format: uuid
-    TestId:
-      name: testId
-      in: path
-      required: true
-      description: The unique identifier of the test.
-      schema:
-        type: string
-        format: uuid
+      - name
+      - type
+      - thresholds
   responses:
     Unauthorized:
       description: Authentication failed or the API key is missing or invalid.

@@ -45,35 +45,6 @@ paths:
           $ref: '#/components/responses/ValidationError'
 components:
   schemas:
-    DataStreamRequest:
-      type: object
-      properties:
-        config:
-          $ref: '#/components/schemas/DataStreamConfig'
-        rows:
-          type: array
-          description: The rows of production data being published.
-          items:
-            type: object
-            additionalProperties: true
-      required:
-      - config
-      - rows
-    DataStreamResponse:
-      type: object
-      properties:
-        success:
-          type: string
-          description: Indicates the data was accepted (e.g. "success").
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-      required:
-      - message
     DataStreamConfig:
       type: object
       description: Maps the columns present in each streamed row to Openlayer concepts. The exact fields depend on the project task type (LLM vs tabular).
@@ -138,6 +109,44 @@ components:
                 type: string
               content:
                 type: string
+    DataStreamRequest:
+      type: object
+      properties:
+        config:
+          $ref: '#/components/schemas/DataStreamConfig'
+        rows:
+          type: array
+          description: The rows of production data being published.
+          items:
+            type: object
+            additionalProperties: true
+      required:
+      - config
+      - rows
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+      - message
+    DataStreamResponse:
+      type: object
+      properties:
+        success:
+          type: string
+          description: Indicates the data was accepted (e.g. "success").
+  parameters:
+    InferencePipelineId:
+      name: inferencePipelineId
+      in: path
+      required: true
+      description: The unique identifier of the inference pipeline.
+      schema:
+        type: string
+        format: uuid
   responses:
     Unauthorized:
       description: Authentication failed or the API key is missing or invalid.
@@ -151,15 +160,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-  parameters:
-    InferencePipelineId:
-      name: inferencePipelineId
-      in: path
-      required: true
-      description: The unique identifier of the inference pipeline.
-      schema:
-        type: string
-        format: uuid
   securitySchemes:
     api_key:
       type: http

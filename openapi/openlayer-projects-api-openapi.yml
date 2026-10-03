@@ -96,20 +96,36 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed or the API key is missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+  parameters:
+    ProjectId:
+      name: projectId
+      in: path
+      required: true
+      description: The unique identifier of the project.
+      schema:
+        type: string
+        format: uuid
   schemas:
+    ProjectList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Project'
+    CreateProjectRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        taskType:
+          type: string
+          description: The task type, e.g. llm-base, tabular-classification, text-classification.
+        description:
+          type: string
+      required:
+      - name
+      - taskType
     Error:
       type: object
       properties:
@@ -171,35 +187,19 @@ components:
       - id
       - name
       - taskType
-    ProjectList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Project'
-    CreateProjectRequest:
-      type: object
-      properties:
-        name:
-          type: string
-        taskType:
-          type: string
-          description: The task type, e.g. llm-base, tabular-classification, text-classification.
-        description:
-          type: string
-      required:
-      - name
-      - taskType
-  parameters:
-    ProjectId:
-      name: projectId
-      in: path
-      required: true
-      description: The unique identifier of the project.
-      schema:
-        type: string
-        format: uuid
+  responses:
+    Unauthorized:
+      description: Authentication failed or the API key is missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     api_key:
       type: http
