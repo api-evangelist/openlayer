@@ -45,6 +45,29 @@ paths:
           $ref: '#/components/responses/ValidationError'
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+      - message
+    DataStreamRequest:
+      type: object
+      properties:
+        config:
+          $ref: '#/components/schemas/DataStreamConfig'
+        rows:
+          type: array
+          description: The rows of production data being published.
+          items:
+            type: object
+            additionalProperties: true
+      required:
+      - config
+      - rows
     DataStreamConfig:
       type: object
       description: Maps the columns present in each streamed row to Openlayer concepts. The exact fields depend on the project task type (LLM vs tabular).
@@ -109,35 +132,25 @@ components:
                 type: string
               content:
                 type: string
-    DataStreamRequest:
-      type: object
-      properties:
-        config:
-          $ref: '#/components/schemas/DataStreamConfig'
-        rows:
-          type: array
-          description: The rows of production data being published.
-          items:
-            type: object
-            additionalProperties: true
-      required:
-      - config
-      - rows
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-      required:
-      - message
     DataStreamResponse:
       type: object
       properties:
         success:
           type: string
           description: Indicates the data was accepted (e.g. "success").
+  responses:
+    ValidationError:
+      description: The request body failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Authentication failed or the API key is missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
     InferencePipelineId:
       name: inferencePipelineId
@@ -147,19 +160,6 @@ components:
       schema:
         type: string
         format: uuid
-  responses:
-    Unauthorized:
-      description: Authentication failed or the API key is missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    ValidationError:
-      description: The request body failed validation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     api_key:
       type: http

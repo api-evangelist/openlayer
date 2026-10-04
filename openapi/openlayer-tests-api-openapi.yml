@@ -128,24 +128,16 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  parameters:
-    ProjectId:
-      name: projectId
-      in: path
-      required: true
-      description: The unique identifier of the project.
-      schema:
-        type: string
-        format: uuid
-    TestId:
-      name: testId
-      in: path
-      required: true
-      description: The unique identifier of the test.
-      schema:
-        type: string
-        format: uuid
   schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+      - message
     UpdateTestsRequest:
       type: object
       properties:
@@ -277,29 +269,6 @@ components:
       required:
       - id
       - status
-    TestResultList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/TestResult'
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-      required:
-      - message
-    TestList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Test'
     CreateTestRequest:
       type: object
       properties:
@@ -333,6 +302,20 @@ components:
       - name
       - type
       - thresholds
+    TestList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Test'
+    TestResultList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/TestResult'
   responses:
     Unauthorized:
       description: Authentication failed or the API key is missing or invalid.
@@ -340,6 +323,23 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  parameters:
+    TestId:
+      name: testId
+      in: path
+      required: true
+      description: The unique identifier of the test.
+      schema:
+        type: string
+        format: uuid
+    ProjectId:
+      name: projectId
+      in: path
+      required: true
+      description: The unique identifier of the project.
+      schema:
+        type: string
+        format: uuid
   securitySchemes:
     api_key:
       type: http

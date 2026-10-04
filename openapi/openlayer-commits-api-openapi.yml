@@ -120,85 +120,16 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  parameters:
-    ProjectId:
-      name: projectId
-      in: path
-      required: true
-      description: The unique identifier of the project.
-      schema:
-        type: string
-        format: uuid
-    ProjectVersionId:
-      name: projectVersionId
-      in: path
-      required: true
-      description: The unique identifier of the project version (commit).
-      schema:
-        type: string
-        format: uuid
   schemas:
-    Commit:
+    Error:
       type: object
       properties:
-        id:
+        code:
           type: string
-          format: uuid
-        projectId:
+        message:
           type: string
-          format: uuid
-        status:
-          type: string
-          description: Commit status, e.g. queued, running, paused, failed, completed, unknown.
-        statusMessage:
-          type:
-          - string
-          - 'null'
-        commit:
-          type: object
-          properties:
-            id:
-              type: string
-            authorId:
-              type:
-              - string
-              - 'null'
-            message:
-              type: string
-            dateCreated:
-              type: string
-              format: date-time
-        dateCreated:
-          type: string
-          format: date-time
-        passingGoalCount:
-          type:
-          - integer
-          - 'null'
-        failingGoalCount:
-          type:
-          - integer
-          - 'null'
-        totalGoalCount:
-          type:
-          - integer
-          - 'null'
-        links:
-          type: object
-          properties:
-            app:
-              type: string
       required:
-      - id
-      - projectId
-      - status
-    CommitList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Commit'
+      - message
     Test:
       type: object
       properties:
@@ -321,22 +252,67 @@ components:
       required:
       - id
       - status
-    TestResultList:
+    CommitList:
       type: object
       properties:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/TestResult'
-    Error:
+            $ref: '#/components/schemas/Commit'
+    Commit:
       type: object
       properties:
-        code:
+        id:
           type: string
-        message:
+          format: uuid
+        projectId:
           type: string
+          format: uuid
+        status:
+          type: string
+          description: Commit status, e.g. queued, running, paused, failed, completed, unknown.
+        statusMessage:
+          type:
+          - string
+          - 'null'
+        commit:
+          type: object
+          properties:
+            id:
+              type: string
+            authorId:
+              type:
+              - string
+              - 'null'
+            message:
+              type: string
+            dateCreated:
+              type: string
+              format: date-time
+        dateCreated:
+          type: string
+          format: date-time
+        passingGoalCount:
+          type:
+          - integer
+          - 'null'
+        failingGoalCount:
+          type:
+          - integer
+          - 'null'
+        totalGoalCount:
+          type:
+          - integer
+          - 'null'
+        links:
+          type: object
+          properties:
+            app:
+              type: string
       required:
-      - message
+      - id
+      - projectId
+      - status
     CreateCommitRequest:
       type: object
       properties:
@@ -361,6 +337,30 @@ components:
       required:
       - commit
       - storageUri
+    TestResultList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/TestResult'
+  parameters:
+    ProjectId:
+      name: projectId
+      in: path
+      required: true
+      description: The unique identifier of the project.
+      schema:
+        type: string
+        format: uuid
+    ProjectVersionId:
+      name: projectVersionId
+      in: path
+      required: true
+      description: The unique identifier of the project version (commit).
+      schema:
+        type: string
+        format: uuid
   responses:
     Unauthorized:
       description: Authentication failed or the API key is missing or invalid.
