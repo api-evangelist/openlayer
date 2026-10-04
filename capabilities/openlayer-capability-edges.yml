@@ -1,0 +1,35 @@
+slug: openlayer
+provider: Openlayer
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 2
+edges:
+- tag: Inference Pipelines
+  spec_file: openlayer-inference-pipelines-api-openapi.yml
+  capability_id: BC-610.60
+  capability_id_l1: BC-610
+  capability_name: Artificial Intelligence Management
+  confidence: 0.75
+  evidence: POST /projects/{projectId}/inference-pipelines 'Create an inference pipeline'; 'List inference
+    pipeline test results'
+  reason: Managing inference pipelines for production model monitoring and their test results is AI/ML
+    model lifecycle and MLOps management.
+- tag: Commits
+  spec_file: openlayer-commits-api-openapi.yml
+  capability_id: BC-610.60
+  capability_id_l1: BC-610
+  capability_name: Artificial Intelligence Management
+  confidence: 0.72
+  evidence: 'POST /projects/{projectId}/versions createCommit ''Create a project commit''; schemas Commit,
+    Test, TestResult; vendor: ''commit model versions and datasets'''
+  reason: Operations version ML model/dataset snapshots and return their test results, i.e. AI/ML model
+    lifecycle (MLOps) management rather than general source control of software.

@@ -177,6 +177,9 @@ apis:
   - type: Documentation
     url: https://www.openlayer.com/docs/monitoring/publishing-data
 common:
+- type: CapabilityMap
+  url: capabilities/openlayer-capability-edges.yml
+  name: Openlayer Business Capability Map
 - type: AgenticAccess
   url: agentic-access/openlayer-agentic-access.yml
 - type: TrustCenter
