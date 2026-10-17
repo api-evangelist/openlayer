@@ -97,6 +97,26 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    CreateProjectRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        taskType:
+          type: string
+          description: The task type, e.g. llm-base, tabular-classification, text-classification.
+        description:
+          type: string
+      required:
+      - name
+      - taskType
+    ProjectList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Project'
     Error:
       type: object
       properties:
@@ -106,13 +126,6 @@ components:
           type: string
       required:
       - message
-    ProjectList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Project'
     Project:
       type: object
       properties:
@@ -163,19 +176,6 @@ components:
               type: string
       required:
       - id
-      - name
-      - taskType
-    CreateProjectRequest:
-      type: object
-      properties:
-        name:
-          type: string
-        taskType:
-          type: string
-          description: The task type, e.g. llm-base, tabular-classification, text-classification.
-        description:
-          type: string
-      required:
       - name
       - taskType
   responses:

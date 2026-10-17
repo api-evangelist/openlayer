@@ -239,37 +239,47 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  parameters:
+    InferenceId:
+      name: inferenceId
+      in: path
+      required: true
+      description: The unique identifier of a streamed inference row.
+      schema:
+        type: string
+    ProjectId:
+      name: projectId
+      in: path
+      required: true
+      description: The unique identifier of the project.
+      schema:
+        type: string
+        format: uuid
+    InferencePipelineId:
+      name: inferencePipelineId
+      in: path
+      required: true
+      description: The unique identifier of the inference pipeline.
+      schema:
+        type: string
+        format: uuid
   schemas:
-    Error:
+    CreateInferencePipelineRequest:
       type: object
       properties:
-        code:
+        name:
           type: string
-        message:
+        description:
           type: string
       required:
-      - message
-    UpdateRowRequest:
+      - name
+    InferencePipelineList:
       type: object
       properties:
-        inferenceId:
-          type: string
-        row:
-          type: object
-          additionalProperties: true
-        config:
-          $ref: '#/components/schemas/DataStreamConfig'
-      required:
-      - inferenceId
-      - row
-    Row:
-      type: object
-      properties:
-        inferenceId:
-          type: string
-        row:
-          type: object
-          additionalProperties: true
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/InferencePipeline'
     Test:
       type: object
       properties:
@@ -343,26 +353,41 @@ components:
       - id
       - name
       - type
-    TestResult:
+    Row:
+      type: object
+      properties:
+        inferenceId:
+          type: string
+        row:
+          type: object
+          additionalProperties: true
+    TestResultList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/TestResult'
+    DataStreamResponse:
+      type: object
+      properties:
+        success:
+          type: string
+          description: Indicates the data was accepted (e.g. "success").
+    InferencePipeline:
       type: object
       properties:
         id:
           type: string
           format: uuid
-        projectVersionId:
+        projectId:
           type:
           - string
           - 'null'
           format: uuid
-        inferencePipelineId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-        status:
+        name:
           type: string
-          description: Result status, e.g. running, passing, failing, skipped, error.
-        statusMessage:
+        description:
           type:
           - string
           - 'null'
@@ -372,40 +397,66 @@ components:
         dateUpdated:
           type: string
           format: date-time
-        dateDataStarts:
+        dateLastSampleReceived:
           type:
           - string
           - 'null'
           format: date-time
-        dateDataEnds:
+        dateLastEvaluated:
           type:
           - string
           - 'null'
           format: date-time
-        goal:
-          $ref: '#/components/schemas/Test'
-        goalId:
+        passingGoalCount:
+          type:
+          - integer
+          - 'null'
+        failingGoalCount:
+          type:
+          - integer
+          - 'null'
+        totalGoalCount:
+          type:
+          - integer
+          - 'null'
+        status:
           type:
           - string
           - 'null'
-          format: uuid
+        statusMessage:
+          type:
+          - string
+          - 'null'
+        links:
+          type: object
+          properties:
+            app:
+              type: string
       required:
       - id
-      - status
-    DataStreamRequest:
+      - name
+    UpdateInferencePipelineRequest:
       type: object
       properties:
-        config:
-          $ref: '#/components/schemas/DataStreamConfig'
-        rows:
-          type: array
-          description: The rows of production data being published.
-          items:
-            type: object
-            additionalProperties: true
+        name:
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
+        referenceDatasetUri:
+          type:
+          - string
+          - 'null'
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
       required:
-      - config
-      - rows
+      - message
     DataStreamConfig:
       type: object
       description: Maps the columns present in each streamed row to Openlayer concepts. The exact fields depend on the project task type (LLM vs tabular).
@@ -470,20 +521,40 @@ components:
                 type: string
               content:
                 type: string
-    InferencePipeline:
+    DataStreamRequest:
+      type: object
+      properties:
+        config:
+          $ref: '#/components/schemas/DataStreamConfig'
+        rows:
+          type: array
+          description: The rows of production data being published.
+          items:
+            type: object
+            additionalProperties: true
+      required:
+      - config
+      - rows
+    TestResult:
       type: object
       properties:
         id:
           type: string
           format: uuid
-        projectId:
+        projectVersionId:
           type:
           - string
           - 'null'
           format: uuid
-        name:
+        inferencePipelineId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        status:
           type: string
-        description:
+          description: Result status, e.g. running, passing, failing, skipped, error.
+        statusMessage:
           type:
           - string
           - 'null'
@@ -493,110 +564,39 @@ components:
         dateUpdated:
           type: string
           format: date-time
-        dateLastSampleReceived:
+        dateDataStarts:
           type:
           - string
           - 'null'
           format: date-time
-        dateLastEvaluated:
+        dateDataEnds:
           type:
           - string
           - 'null'
           format: date-time
-        passingGoalCount:
-          type:
-          - integer
-          - 'null'
-        failingGoalCount:
-          type:
-          - integer
-          - 'null'
-        totalGoalCount:
-          type:
-          - integer
-          - 'null'
-        status:
+        goal:
+          $ref: '#/components/schemas/Test'
+        goalId:
           type:
           - string
           - 'null'
-        statusMessage:
-          type:
-          - string
-          - 'null'
-        links:
-          type: object
-          properties:
-            app:
-              type: string
+          format: uuid
       required:
       - id
-      - name
-    CreateInferencePipelineRequest:
+      - status
+    UpdateRowRequest:
       type: object
       properties:
-        name:
+        inferenceId:
           type: string
-        description:
-          type: string
+        row:
+          type: object
+          additionalProperties: true
+        config:
+          $ref: '#/components/schemas/DataStreamConfig'
       required:
-      - name
-    UpdateInferencePipelineRequest:
-      type: object
-      properties:
-        name:
-          type: string
-        description:
-          type:
-          - string
-          - 'null'
-        referenceDatasetUri:
-          type:
-          - string
-          - 'null'
-    DataStreamResponse:
-      type: object
-      properties:
-        success:
-          type: string
-          description: Indicates the data was accepted (e.g. "success").
-    InferencePipelineList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/InferencePipeline'
-    TestResultList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/TestResult'
-  parameters:
-    InferenceId:
-      name: inferenceId
-      in: path
-      required: true
-      description: The unique identifier of a streamed inference row.
-      schema:
-        type: string
-    ProjectId:
-      name: projectId
-      in: path
-      required: true
-      description: The unique identifier of the project.
-      schema:
-        type: string
-        format: uuid
-    InferencePipelineId:
-      name: inferencePipelineId
-      in: path
-      required: true
-      description: The unique identifier of the inference pipeline.
-      schema:
-        type: string
-        format: uuid
+      - inferenceId
+      - row
   responses:
     Unauthorized:
       description: Authentication failed or the API key is missing or invalid.

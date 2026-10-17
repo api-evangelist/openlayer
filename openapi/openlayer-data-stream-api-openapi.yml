@@ -44,7 +44,26 @@ paths:
         '422':
           $ref: '#/components/responses/ValidationError'
 components:
+  responses:
+    Unauthorized:
+      description: Authentication failed or the API key is missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    ValidationError:
+      description: The request body failed validation.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    DataStreamResponse:
+      type: object
+      properties:
+        success:
+          type: string
+          description: Indicates the data was accepted (e.g. "success").
     Error:
       type: object
       properties:
@@ -54,20 +73,6 @@ components:
           type: string
       required:
       - message
-    DataStreamRequest:
-      type: object
-      properties:
-        config:
-          $ref: '#/components/schemas/DataStreamConfig'
-        rows:
-          type: array
-          description: The rows of production data being published.
-          items:
-            type: object
-            additionalProperties: true
-      required:
-      - config
-      - rows
     DataStreamConfig:
       type: object
       description: Maps the columns present in each streamed row to Openlayer concepts. The exact fields depend on the project task type (LLM vs tabular).
@@ -132,25 +137,20 @@ components:
                 type: string
               content:
                 type: string
-    DataStreamResponse:
+    DataStreamRequest:
       type: object
       properties:
-        success:
-          type: string
-          description: Indicates the data was accepted (e.g. "success").
-  responses:
-    ValidationError:
-      description: The request body failed validation.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Authentication failed or the API key is missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+        config:
+          $ref: '#/components/schemas/DataStreamConfig'
+        rows:
+          type: array
+          description: The rows of production data being published.
+          items:
+            type: object
+            additionalProperties: true
+      required:
+      - config
+      - rows
   parameters:
     InferencePipelineId:
       name: inferencePipelineId

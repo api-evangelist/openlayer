@@ -129,24 +129,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-      required:
-      - message
-    UpdateTestsRequest:
-      type: object
-      properties:
-        tests:
-          type: array
-          items:
-            $ref: '#/components/schemas/Test'
-      required:
-      - tests
     Test:
       type: object
       properties:
@@ -220,6 +202,71 @@ components:
       - id
       - name
       - type
+    TestList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Test'
+    TestResultList:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/TestResult'
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+      - message
+    UpdateTestsRequest:
+      type: object
+      properties:
+        tests:
+          type: array
+          items:
+            $ref: '#/components/schemas/Test'
+      required:
+      - tests
+    CreateTestRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
+        type:
+          type: string
+        subtype:
+          type: string
+        thresholds:
+          type: array
+          items:
+            type: object
+            properties:
+              measurement:
+                type: string
+              operator:
+                type: string
+              value:
+                oneOf:
+                - type: number
+                - type: string
+                - type: boolean
+                - type: array
+                  items: {}
+      required:
+      - name
+      - type
+      - thresholds
     TestResult:
       type: object
       properties:
@@ -269,60 +316,6 @@ components:
       required:
       - id
       - status
-    CreateTestRequest:
-      type: object
-      properties:
-        name:
-          type: string
-        description:
-          type:
-          - string
-          - 'null'
-        type:
-          type: string
-        subtype:
-          type: string
-        thresholds:
-          type: array
-          items:
-            type: object
-            properties:
-              measurement:
-                type: string
-              operator:
-                type: string
-              value:
-                oneOf:
-                - type: number
-                - type: string
-                - type: boolean
-                - type: array
-                  items: {}
-      required:
-      - name
-      - type
-      - thresholds
-    TestList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/Test'
-    TestResultList:
-      type: object
-      properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/TestResult'
-  responses:
-    Unauthorized:
-      description: Authentication failed or the API key is missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   parameters:
     TestId:
       name: testId
@@ -340,6 +333,13 @@ components:
       schema:
         type: string
         format: uuid
+  responses:
+    Unauthorized:
+      description: Authentication failed or the API key is missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     api_key:
       type: http

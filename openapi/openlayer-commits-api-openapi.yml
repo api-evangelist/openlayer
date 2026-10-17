@@ -121,15 +121,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-      required:
-      - message
     Test:
       type: object
       properties:
@@ -203,62 +194,37 @@ components:
       - id
       - name
       - type
-    TestResult:
+    CreateCommitRequest:
       type: object
       properties:
-        id:
+        commit:
+          type: object
+          properties:
+            message:
+              type: string
+          required:
+          - message
+        storageUri:
           type: string
-          format: uuid
-        projectVersionId:
+          description: The storage URI (e.g. s3://...) where the committed bundle was uploaded.
+        archived:
+          type:
+          - boolean
+          - 'null'
+        deploymentStatus:
           type:
           - string
           - 'null'
-          format: uuid
-        inferencePipelineId:
-          type:
-          - string
-          - 'null'
-          format: uuid
-        status:
-          type: string
-          description: Result status, e.g. running, passing, failing, skipped, error.
-        statusMessage:
-          type:
-          - string
-          - 'null'
-        dateCreated:
-          type: string
-          format: date-time
-        dateUpdated:
-          type: string
-          format: date-time
-        dateDataStarts:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        dateDataEnds:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        goal:
-          $ref: '#/components/schemas/Test'
-        goalId:
-          type:
-          - string
-          - 'null'
-          format: uuid
       required:
-      - id
-      - status
-    CommitList:
+      - commit
+      - storageUri
+    TestResultList:
       type: object
       properties:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/Commit'
+            $ref: '#/components/schemas/TestResult'
     Commit:
       type: object
       properties:
@@ -313,54 +279,71 @@ components:
       - id
       - projectId
       - status
-    CreateCommitRequest:
-      type: object
-      properties:
-        commit:
-          type: object
-          properties:
-            message:
-              type: string
-          required:
-          - message
-        storageUri:
-          type: string
-          description: The storage URI (e.g. s3://...) where the committed bundle was uploaded.
-        archived:
-          type:
-          - boolean
-          - 'null'
-        deploymentStatus:
-          type:
-          - string
-          - 'null'
-      required:
-      - commit
-      - storageUri
-    TestResultList:
+    CommitList:
       type: object
       properties:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/TestResult'
-  parameters:
-    ProjectId:
-      name: projectId
-      in: path
-      required: true
-      description: The unique identifier of the project.
-      schema:
-        type: string
-        format: uuid
-    ProjectVersionId:
-      name: projectVersionId
-      in: path
-      required: true
-      description: The unique identifier of the project version (commit).
-      schema:
-        type: string
-        format: uuid
+            $ref: '#/components/schemas/Commit'
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+      required:
+      - message
+    TestResult:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        projectVersionId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        inferencePipelineId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        status:
+          type: string
+          description: Result status, e.g. running, passing, failing, skipped, error.
+        statusMessage:
+          type:
+          - string
+          - 'null'
+        dateCreated:
+          type: string
+          format: date-time
+        dateUpdated:
+          type: string
+          format: date-time
+        dateDataStarts:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        dateDataEnds:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        goal:
+          $ref: '#/components/schemas/Test'
+        goalId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+      required:
+      - id
+      - status
   responses:
     Unauthorized:
       description: Authentication failed or the API key is missing or invalid.
@@ -374,6 +357,23 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
+  parameters:
+    ProjectVersionId:
+      name: projectVersionId
+      in: path
+      required: true
+      description: The unique identifier of the project version (commit).
+      schema:
+        type: string
+        format: uuid
+    ProjectId:
+      name: projectId
+      in: path
+      required: true
+      description: The unique identifier of the project.
+      schema:
+        type: string
+        format: uuid
   securitySchemes:
     api_key:
       type: http
