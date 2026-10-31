@@ -1,4 +1,4 @@
-# Openlayer (openlayer)
+# Openlayer
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,119 +66,135 @@
 
 Openlayer is an AI evaluation, testing, and observability platform for machine learning and LLM applications. Its REST API lets teams create projects, commit model versions and datasets, run tests, stream production inference data into monitoring pipelines, and retrieve test results - with official SDKs generated from a Stainless OpenAPI definition.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/openlayer/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/openlayer/refs/heads/main/apis.yml)
+**Areas:** Artificial Intelligence · Evaluation · Testing · Observability · LLM · MLOps
 
-## Tags
+## Openlayer on APIs.io
 
-- AI
-- Evaluation
-- Testing
-- Observability
-- LLM
-- MLOps
+Everything profiled for Openlayer is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/openlayer/](https://apis.io/providers/openlayer/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (6)
 
-- **Created:** 2026-06-20
-- **Modified:** 2026-06-20
+- [Openlayer Commits API](https://apis.io/apis/openlayer/openlayer-commits-api/) — Project versions (commits) and their test results.
+- [Openlayer Data Stream API](https://apis.io/apis/openlayer/openlayer-data-stream-api/) — Publish production inference data to a pipeline.
+- [Openlayer Inference Pipelines API](https://apis.io/apis/openlayer/openlayer-inference-pipelines-api/) — Production monitoring pipelines and their rows, sessions, and users.
+- [Openlayer Projects API](https://apis.io/apis/openlayer/openlayer-projects-api/) — Create, list, and delete projects.
+- [Openlayer Storage API](https://apis.io/apis/openlayer/openlayer-storage-api/) — Presigned URLs for uploading datasets and artifacts.
+- [Openlayer Tests API](https://apis.io/apis/openlayer/openlayer-tests-api/) — Define, evaluate, and read project tests.
 
-## APIs
+### Published properties
 
-### Openlayer Projects API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Create, list, and delete projects, and manage the tests defined within a project. Projects are the top-level container for models, datasets, commits, and inference pipelines.
+#### MCP servers (1)
 
-- **Human URL:** [https://www.openlayer.com/docs/api-reference/rest/overview](https://www.openlayer.com/docs/api-reference/rest/overview)
-- **Base URL:** `https://api.openlayer.com/v1`
+Model Context Protocol servers that expose the API to agents.
 
-#### Tags
+- [openlayer](https://apis.io/servers/openlayer/openlayer/)
 
-- Projects
-- Workspaces
-- Tests
+#### Agentic access (1)
 
-#### Properties
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- [Documentation](https://www.openlayer.com/docs)
-- [API Reference](https://www.openlayer.com/docs/api-reference/rest/overview)
-- [OpenAPI](openapi/openlayer-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/openlayer.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/openlayer.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Openlayer Agentic Access](https://apis.io/agentic-access/openlayer/openlayer-agentic-access/)
 
-### Openlayer Inference Pipelines API
+#### Collections (7)
 
-Create, retrieve, update, and delete inference pipelines for monitoring production models, plus manage pipeline rows, sessions, and users used in production observability.
+Postman and Open Collection request collections.
 
-- **Human URL:** [https://www.openlayer.com/docs/api-reference/rest/overview](https://www.openlayer.com/docs/api-reference/rest/overview)
-- **Base URL:** `https://api.openlayer.com/v1`
+- [Openlayer API](https://apis.io/collections/openlayer/open-openlayer/)
+- [Openlayer Commits API](https://apis.io/collections/openlayer/open-openlayer-commits-api/)
+- [Openlayer Commits Data Stream API](https://apis.io/collections/openlayer/open-openlayer-data-stream-api/)
+- [Openlayer Commits Inference Pipelines API](https://apis.io/collections/openlayer/open-openlayer-inference-pipelines-api/)
+- [Openlayer Commits Projects API](https://apis.io/collections/openlayer/open-openlayer-projects-api/)
+- [Openlayer Commits Storage API](https://apis.io/collections/openlayer/open-openlayer-storage-api/)
+- [Openlayer Commits Tests API](https://apis.io/collections/openlayer/open-openlayer-tests-api/)
 
-#### Tags
+#### Security (3)
 
-- Inference Pipelines
-- Monitoring
-- Observability
+Authentication, trust centre, and vulnerability disclosure.
 
-#### Properties
+- [Openlayer Authentication](https://apis.io/security/openlayer/openlayer-authentication/)
+- [Openlayer Domain Security](https://apis.io/security/openlayer/openlayer-domain-security/)
+- [Openlayer Trust Center](https://apis.io/security/openlayer/openlayer-trust-center/)
 
-- [Documentation](https://www.openlayer.com/docs/monitoring)
-- [API Reference](https://www.openlayer.com/docs/api-reference/rest/overview)
-- [OpenAPI](openapi/openlayer-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/openlayer.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/openlayer.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Plans and pricing (1)
 
-### Openlayer Data Stream API
+Published plans, tiers and prices.
 
-Publish production inference data (rows) to an inference pipeline via the data-stream endpoint, mapping input variables, outputs, token counts, costs, timestamps, and ground truth for continuous monitoring.
+- [Openlayer Plans Pricing](https://apis.io/plans/openlayer/openlayer-plans-pricing/)
 
-- **Human URL:** [https://www.openlayer.com/docs/monitoring/publishing-data](https://www.openlayer.com/docs/monitoring/publishing-data)
-- **Base URL:** `https://api.openlayer.com/v1`
+#### Rate limits (1)
 
-#### Tags
+Published request limits.
 
-- Data Stream
-- Production Data
-- Monitoring
+- [Openlayer Rate Limits](https://apis.io/rate-limits/openlayer/openlayer-rate-limits/)
 
-#### Properties
+#### FinOps (1)
 
-- [Documentation](https://www.openlayer.com/docs/monitoring/publishing-data)
-- [API Reference](https://www.openlayer.com/docs/api-reference/rest/overview)
-- [OpenAPI](openapi/openlayer-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/openlayer.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/openlayer.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+What the API costs to run, by operation.
 
-### Openlayer Commits and Test Results API
+- [Openlayer Finops](https://apis.io/finops/openlayer/openlayer-finops/)
 
-Create and list project commits (versions), retrieve a single commit, evaluate tests, and fetch commit and inference-pipeline test results to gate deployments on evaluation outcomes.
+## Where to find this API
 
-- **Human URL:** [https://www.openlayer.com/docs/api-reference/rest/overview](https://www.openlayer.com/docs/api-reference/rest/overview)
-- **Base URL:** `https://api.openlayer.com/v1`
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-#### Tags
-
-- Commits
-- Versions
-- Test Results
-
-#### Properties
-
-- [Documentation](https://www.openlayer.com/docs)
-- [API Reference](https://www.openlayer.com/docs/api-reference/rest/overview)
-- [OpenAPI](openapi/openlayer-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/openlayer.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/openlayer.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [GitHub Organization](https://github.com/openlayer-ai)
-- [LinkedIn](https://www.linkedin.com/company/openlayer)
 - [Website](https://www.openlayer.com)
 - [Documentation](https://www.openlayer.com/docs)
-- [Plans](plans/openlayer-plans-pricing.yml)
-- [Rate Limits](rate-limits/openlayer-rate-limits.yml)
-- [Fin Ops](finops/openlayer-finops.yml)
+- [Blog](https://www.openlayer.com/blog)
+- [GitHub](https://github.com/openlayer-ai)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 29.2** — thin · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 68.3 |
+| Contract quality | 50.5 |
+| Contract governance | 0.0 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 32.1 |
+| Access clarity | 13.2 |
+
+**Agent readiness 42.4** — agent-ready (gated down from agent-native)
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 15.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/openlayer/](https://apis.io/providers/openlayer/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Openlayer: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/openlayer/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
